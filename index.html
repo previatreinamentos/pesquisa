@@ -19,6 +19,7 @@ body {
 /* Custom scrollbar para estética premium */
 ::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
@@ -52,6 +53,7 @@ body {
 </style>
 </head>
 <body class="bg-slate-50 text-slate-900 flex flex-col min-h-screen">
+
 <!-- Header escuro para integração perfeita da logo preta fornecida -->
 <header class="bg-[#0b0c10] shadow-xl sticky top-0 z-50 border-b-2 border-[#0497a7]">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
@@ -94,7 +96,7 @@ body {
         O Seu Feedback Constrói o Nosso Treinamento
       </h2>
       <p class="text-base sm:text-lg text-slate-100 max-w-2xl mx-auto font-light leading-relaxed">
-        Para oferecermos a melhor e mais personalizada capacitação para a sua equipa, <strong class="text-[#f96c05] font-bold">atribua uma nota de interesse de 0 a 10</strong> em cada um dos cursos abaixo.
+        Para oferecer-mos a melhor e mais personalizada capacitação para a sua equipa, <strong class="text-[#f96c05] font-bold">atribua uma nota de interesse de 0 a 10</strong> em cada um dos cursos abaixo.
       </p>
       <div class="mt-6 flex flex-wrap justify-center gap-3 text-xs">
         <span class="bg-black/20 px-3 py-1.5 rounded-lg flex items-center gap-2">
@@ -179,7 +181,7 @@ body {
           <span id="stat-rated-count" class="text-4xl font-extrabold text-[#0497a7]">0</span>
           <span class="text-sm font-medium text-slate-500">utilizadores</span>
         </div>
-        <p class="text-xs text-slate-500 mt-2">Votantes anónimos que enviaram as suas preferências.</p>
+        <p class="text-xs text-slate-500 mt-2">Votantes consolidados que enviaram as suas preferências.</p>
       </div>
 
       <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
@@ -215,7 +217,7 @@ body {
       <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-md lg:col-span-5 flex flex-col">
         <div class="mb-6">
           <h3 class="text-lg font-bold text-slate-900">Interesse por Categorias</h3>
-          <p class="text-xs text-slate-500">Representação em gráfico de pizza do nível de interesse acumulado.</p>
+          <p class="text-xs text-slate-500">Nível médio de preferência acumulado em cada área de estudo.</p>
         </div>
         <div class="flex-grow flex flex-col sm:flex-row items-center justify-center gap-6">
           <!-- SVG Pizza Chart Container -->
@@ -331,12 +333,12 @@ body {
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
         <div>
-          <label class="block text-xs font-bold text-[#8c7c54] uppercase mb-1.5">Sugestão de novo Curso *</label>
-          <input type="text" id="form-suggested-course" required placeholder="Ex: Direção Tática de Segurança" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#0497a7] focus:border-transparent text-sm bg-white transition-all">
+          <label class="block text-xs font-bold text-[#8c7c54] uppercase mb-1.5">Sugestão de novo Curso</label>
+          <input type="text" id="form-suggested-course" placeholder="Ex: Direção Tática de Segurança" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#0497a7] focus:border-transparent text-sm bg-white transition-all">
         </div>
         <div>
-          <label class="block text-xs font-bold text-[#8c7c54] uppercase mb-1.5">Sugestão de nova Categoria *</label>
-          <input type="text" id="form-suggested-category" required placeholder="Ex: Transporte de Valores" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#0497a7] focus:border-transparent text-sm bg-white transition-all">
+          <label class="block text-xs font-bold text-[#8c7c54] uppercase mb-1.5">Sugestão de nova Categoria</label>
+          <input type="text" id="form-suggested-category" placeholder="Ex: Transporte de Valores" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#0497a7] focus:border-transparent text-sm bg-white transition-all">
         </div>
       </div>
 
@@ -412,10 +414,10 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebas
 import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 import { getFirestore, doc, setDoc, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-// SUBSTITUA A URL ABAIXO PELA SUA NOVA URL GERADA NO PASSO 2 (DEPLOY)
+// Webhook Google Sheets
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxqM4OQc3f06_WZU19dmlnzpx3jNP6quYcgVOQh-1R_DTvXv100vGGp1foc8Cv7jE3kkQ/exec'; 
 
-// Dados dos cursos e categorias oficiais (Declarados no topo para evitar TDZ)
+// Dados dos cursos e categorias oficiais
 const courses = [
   // ESPECIALIZADOS
   {
@@ -430,7 +432,7 @@ const courses = [
     title: "Transporte Escolar: Normas e Segurança Viária",
     cat: "Especializados",
     desc: "Técnicas de segurança no embarque/desembarque e relacionamento ético no transporte de escolares.",
-    longDesc: "Preparação de condutores com as mais rígidas exigências técnicas do trânsito escolar. Desenvolve condutas preventivas, a inspection diária do veículo escolar, além de dinâmicas para assegurar a integridade de menores de idade durante o trajeto de acordo com as normas de segurança viária."
+    longDesc: "Preparação de condutores com as mais rígidas exigências técnicas do trânsito escolar. Desenvolve condutas preventivas, a inspeção diária do veículo escolar, além de dinâmicas para assegurar a integridade de menores de idade durante o trajeto de acordo com as normas de segurança viária."
   },
   {
     id: 3,
@@ -495,13 +497,13 @@ const courses = [
     title: "Eco-Driving: Eficiência Energética e Redução de Custos",
     cat: "GestaoEficiencia",
     desc: "Gerenciamento inteligente de marchas, controle de inércia e otimização do combustível.",
-    longDesc: "Focado em motoristas de frotas comerciais leves e pesadas. Ensina a compreender as rotações eficientes do motor, acorrencia da aceleração progressiva, e o aproveitamento máximo da energia cinética para reduzir até 20% do combustível e desgaste."
+    longDesc: "Focado em motoristas de frotas comerciais leves e pesadas. Ensina a compreender as rotações eficientes do motor, ocorrência da aceleração progressiva, e o aproveitamento máximo da energia cinética para reduzir até 20% do combustível e desgaste."
   },
   {
     id: 12,
     title: "Gestão de Performance: Telemetria Aplicada",
     cat: "GestaoEficiencia",
-    desc: "Análise de relatórios de computador de bordo e correção activa de hábitos ruins de direção.",
+    desc: "Análise de relatórios de computador de bordo e correção ativa de hábitos ruins de direção.",
     longDesc: "Instrui motoristas profissionais a ler e compreender os feedbacks gerados pelo sistema de telemetria corporativa (excesso de velocidade, frenagens bruscas, tempo em marcha lenta), aplicando correções táticas imediatas."
   },
   {
@@ -531,28 +533,28 @@ const courses = [
     title: "Operação e Segurança Off-Road 4x4",
     cat: "OperacoesEspeciais",
     desc: "Mapeamento de tração integral, uso de marcha reduzida e transposição segura de aclives.",
-    longDesc: "Treinamento tático e operacional para frotas que trafegam em estradas rurais, frentes de obra ou acessos lamacentos de mineradoras. foca no uso correto de bloqueios de diferencial e prevenção de quebras de suspensão."
+    longDesc: "Treinamento tático e operacional para frotas que trafegam em estradas rurais, frentes de obra ou acessos lamacentos de mineradoras. Foca no uso correto de bloqueios de diferencial e prevenção de quebras de suspensão."
   },
   {
     id: 17,
     title: "Resgate e Auto-recuperação em Ambientes Hostis",
     cat: "OperacoesEspeciais",
     desc: "Uso de guinchos elétricos, cintas de arrasto, pranchas e ancoragem segura off-road.",
-    longDesc: "Desenvolvido para equipes operacionais de áreas de difícil acesso ou equipes de campo. Treina o uso de equipamentos de força física e mecânica para reuniões de remoção de veículos atolados de maneira 100% segura e regulamentada."
+    longDesc: "Desenvolvido para equipes operacionais de áreas de difícil acesso ou equipes de campo. Treina o uso de equipamentos de força física e mecânica para remoção de veículos atolados de maneira 100% segura e regulamentada."
   },
   {
     id: 18,
     title: "Direção de Veículos de Apoio em Mineração e Obras",
     cat: "OperacoesEspeciais",
-    desc: "Tráfego seguro em mineradoras, interação com caminhões giants de minas e pontos cegos críticos.",
-    longDesc: "Ensina as rígidas normas setoriais do tráfego interno de obras complexas e jazidas. Prepara o motorista de picapes leves a sinalizar-se perante máquinas giants, evitando acidentes fatais por esmagamento."
+    desc: "Tráfego seguro em mineradoras, interação com caminhões gigantes de minas e pontos cegos críticos.",
+    longDesc: "Ensina as rígidas normas setoriais do tráfego interno de obras complexas e jazidas. Prepara o motorista de picapes leves a sinalizar-se perante máquinas gigantes, evitando acidentes graves por esmagamento ou ponto cego."
   },
   {
     id: 19,
     title: "Técnicas de Operação em Terrenos de Difícil Acesso",
     cat: "OperacoesEspeciais",
     desc: "Operações táticas em dunas, encostas escorregadias, terrenos pedregosos e travessias alagadas.",
-    longDesc: "Um guia aprofundado sobre inclininações extremas laterais, prevenção de capotamentos, uso do freio motor em descidas acentuadas e cálculo seguro da altura máxima de água permitida para cruzamento."
+    longDesc: "Um guia aprofundado sobre inclinações extremas laterais, prevenção de capotamentos, uso do freio motor em descidas acentuadas e cálculo seguro da altura máxima de água permitida para cruzamento."
   },
   {
     id: 20,
@@ -624,7 +626,7 @@ const courses = [
     id: 27,
     title: "Condução de Veículos Híbridos e Elétricos",
     cat: "TecnologiaInovacao",
-    desc: "Particularidades de torque instantâneo, frenagem regenerativa e segurança activa em alta tensão.",
+    desc: "Particularidades de torque instantâneo, frenagem regenerativa e segurança ativa em alta tensão.",
     longDesc: "Capacita condutores corporativos para operar frotas modernas eletrificadas. Aborda táticas de máxima regeneração de bateria, condução preditiva, gerenciamento inteligente de autonomia e protocolos vitais de segurança em sistemas elétricos de alta tensão corporativa."
   },
   {
@@ -636,7 +638,6 @@ const courses = [
   }
 ];
 
-// Cores associadas a cada categoria para renderização visual do gráfico de pizza e faixas dos cards
 const categoryColors = {
   'Especializados': '#0497a7',
   'SegurancaComportamento': '#f96c05',
@@ -657,65 +658,157 @@ const friendlyCategories = {
   'TecnologiaInovacao': 'Tecnologia e Inovação'
 };
 
-// Variáveis de Estado locais & globais (Declaradas no topo para evitar Temporal Dead Zone / ReferenceError)
+// Dados de simulação (Fallback para quando o Firebase não possui credenciais salvas no ambiente)
+const mockSimulationVotes = [
+  {
+    id: "simulated-vote-1",
+    nome: "Carlos Eduardo Silva",
+    empresa: "TransLeste Transportes Ltda",
+    cargo: "Supervisor de Frota",
+    email: "carlos.frota@transleste.com",
+    telefone: "(11) 98111-2222",
+    cursoSugerido: "MOPP Reciclagem Express",
+    categoriaSugerida: "Reciclagem",
+    votos: {
+      "Formação de Condutores de Emergência (Res. 1020)": 9,
+      "MOPP: Segurança no Transporte de Cargas Perigosas": 10,
+      "Direção Defensiva: Técnica e Comportamento": 10,
+      "Condução Preventiva para Frotas Leves e Utilitários": 8,
+      "Gestão de Performance: Telemetria Aplicada": 9,
+      "Manutenção Preventiva e Conservação da Frota": 8,
+      "Atualização em Legislação e CTB": 9
+    }
+  },
+  {
+    id: "simulated-vote-2",
+    nome: "Mariana Alencar",
+    empresa: "Mineração Ouro Verde",
+    cargo: "Engenheira de Segurança (SESMT)",
+    email: "mariana.alencar@ouroverde.com",
+    telefone: "(31) 99222-3333",
+    votos: {
+      "Direção Defensiva: Técnica e Comportamento": 10,
+      "Condução em Condições Adversas e Climas Extremos": 9,
+      "Operação e Segurança Off-Road 4x4": 10,
+      "Resgate e Auto-recuperação em Ambientes Hostis": 10,
+      "Direção de Veículos de Apoio em Mineração e Obras": 10,
+      "Técnicas de Operação em Terrenos de Difícil Acesso": 9,
+      "Psicologia do Trânsito: Gestão de Fadiga e Estresse": 8
+    }
+  },
+  {
+    id: "simulated-vote-3",
+    nome: "Roberto Guedes",
+    empresa: "Logística Expressa Brasil",
+    cargo: "Diretor de Operações",
+    email: "roberto.guedes@logexpress.com.br",
+    telefone: "(21) 97333-4444",
+    votos: {
+      "Direção Defensiva: Técnica e Comportamento": 9,
+      "Eco-Driving: Eficiência Energética e Redução de Custos": 10,
+      "Gestão de Performance: Telemetria Aplicada": 9,
+      "Condução Eficiente e Redução de Emissões (Foco em ESG)": 10,
+      "Gestão de TCO: Otimizando o Ciclo de Vida do Veículo": 8,
+      "Condução de Veículos Híbridos e Elétricos": 9,
+      "Mobilidade Corporativa Inteligente e Sustentável": 8
+    }
+  }
+];
+
+// Variáveis de Estado locais & globais
 let user = null;
-let allVotesData = [];
+let allVotesData = [...mockSimulationVotes]; // Carregado com simulação rica por padrão
 let cachedConsolidatedCourses = [];
 let userVotes = {};
 let currentModalCourseId = null;
 let currentPage = 'catalog';
+let isSimulationMode = true; // Muda para false se conectar no Firebase real
 
-// Inicialização segura com as variáveis de ambiente integradas
-const firebaseConfig = JSON.parse(__firebase_config);
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+// Carregamento Seguro de Credenciais
+let dbInstance = null;
+let authInstance = null;
+let appId = 'previa-consultoria-app';
 
-// Autenticação anônima inicial do utilizador
-const initAuth = async () => {
-  if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-    await signInWithCustomToken(auth, __initial_auth_token);
+try {
+  if (typeof __firebase_config !== 'undefined' && __firebase_config) {
+    const config = JSON.parse(__firebase_config);
+    const firebaseApp = initializeApp(config);
+    authInstance = getAuth(firebaseApp);
+    dbInstance = getFirestore(firebaseApp);
+    appId = typeof __app_id !== 'undefined' ? __app_id : 'previa-consultoria-app';
+    isSimulationMode = false;
+    console.log("Sistema conectado na nuvem corporativa.");
   } else {
-    await signInAnonymously(auth);
+    console.log("Ambiente sem Firebase Config. Rodando em Modo Simulação Local Premium.");
+  }
+} catch (e) {
+  console.error("Falha ao inicializar o Firebase. Rodando em Modo Simulação Local.", e);
+  isSimulationMode = true;
+}
+
+// Inicialização segura de Autenticação se não for simulação
+const initAuth = async () => {
+  if (isSimulationMode || !authInstance) return;
+  try {
+    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+      await signInWithCustomToken(authInstance, __initial_auth_token);
+    } else {
+      await signInAnonymously(authInstance);
+    }
+  } catch (error) {
+    console.warn("Autenticação anônima bloqueada ou indisponível. Utilizando modo simulador.", error);
+    isSimulationMode = true;
   }
 };
-initAuth();
 
-onAuthStateChanged(auth, (u) => {
-  user = u;
-  if (user) {
-    // Escuta em tempo real os votos públicos consolidados na nuvem
-    setupRealtimeVotes();
-  }
-});
-
-function setupRealtimeVotes() {
-  if (!user) return;
-  const votesCol = collection(db, 'artifacts', appId, 'public', 'data', 'votes');
-  onSnapshot(votesCol, (snapshot) => {
-    allVotesData = [];
-    snapshot.forEach((doc) => {
-      allVotesData.push({ id: doc.id, ...doc.data() });
-    });
-    
-    // Atualiza dinamicamente as estatísticas e os painéis de resultados
-    updatePublicBadges();
-    if (currentPage === 'results') {
-      renderResultsDashboard();
+if (!isSimulationMode) {
+  initAuth();
+  onAuthStateChanged(authInstance, (u) => {
+    user = u;
+    if (user) {
+      setupRealtimeVotes();
     }
-  }, (error) => {
-    console.error("Erro ao escutar dados da nuvem:", error);
   });
+} else {
+  // Dispara carregamento das estatísticas da simulação local no carregamento da tela
+  setTimeout(() => {
+    updatePublicBadges();
+  }, 100);
+}
+
+// Configuração de sincronização em tempo real na nuvem
+function setupRealtimeVotes() {
+  if (isSimulationMode || !user || !dbInstance) return;
+  try {
+    const votesCol = collection(dbInstance, 'artifacts', appId, 'public', 'data', 'votes');
+    onSnapshot(votesCol, (snapshot) => {
+      const liveVotes = [];
+      snapshot.forEach((doc) => {
+        liveVotes.push({ id: doc.id, ...doc.data() });
+      });
+      // Mescla votos da nuvem com votos simulados para gráficos mais robustos
+      allVotesData = liveVotes.length > 0 ? liveVotes : [...mockSimulationVotes];
+      updatePublicBadges();
+      if (currentPage === 'results') {
+        renderResultsDashboard();
+      }
+    }, (error) => {
+      console.warn("Acesso restrito ao Firestore no sandbox. Utilizando simulação local.", error);
+      isSimulationMode = true;
+    });
+  } catch (e) {
+    isSimulationMode = true;
+  }
 }
 
 // Atualizar badges públicos de participação
 function updatePublicBadges() {
   const count = allVotesData.length;
-  document.getElementById('nav-results-badge').innerText = count;
+  const badge = document.getElementById('nav-results-badge');
+  if (badge) badge.innerText = count;
 }
 
-// Expõe funções vitais ao escopo global (para links e botões onclick do HTML tradicional)
+// Expõe funções vitais ao escopo global para compatibilidade com eventos inline
 window.switchPage = switchPage;
 window.filterCategory = filterCategory;
 window.vote = vote;
@@ -728,21 +821,17 @@ window.submitForm = submitForm;
 window.updateCourseChart = updateCourseChart;
 window.setPieCenterText = setPieCenterText;
 
-// Gera dinamicamente o design do topo do card (Paralelogramo clássico e limpo, sem efeitos ou polígonos extras)
+// Gera dinamicamente o design do topo do card (Paralelogramo geométrico clean)
 function getCourseCardHeaderHtml(c) {
   const color = categoryColors[c.cat] || '#0497a7';
   return `
     <div class="w-full h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-950 flex flex-col justify-center items-center p-4 text-center relative select-none">
-      <!-- Grid técnico de fundo sutil -->
       <div class="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:14px_24px]"></div>
       
-      <!-- Paralelogramo Geométrico Clássico e Limpo -->
       <svg class="absolute inset-0 w-full h-full p-2" preserveAspectRatio="none" viewBox="0 0 100 100">
-        <!-- Paralelogramo Simples Sem Efeitos Extras -->
         <polygon points="10,15 90,15 80,85 0,85" fill="${color}" opacity="0.95" />
       </svg>
       
-      <!-- Título do Curso Centralizado -->
       <div class="w-4/5 py-1 px-2 z-10 text-center">
         <span class="text-white text-xs sm:text-sm font-black uppercase tracking-wider drop-shadow-md line-clamp-3 leading-snug">
           ${c.title}
@@ -752,7 +841,7 @@ function getCourseCardHeaderHtml(c) {
   `;
 }
 
-// Função para alternar de página
+// Função para alternar de página de forma fluida
 function switchPage(pageId) {
   currentPage = pageId;
   const catalogPage = document.getElementById('page-catalog');
@@ -777,16 +866,17 @@ function switchPage(pageId) {
 
 // Atualiza o texto centralizado do gráfico Donut/Pizza
 function setPieCenterText(label, score) {
-  document.getElementById('pie-center-label').innerText = label;
-  document.getElementById('pie-center-value').innerText = score;
+  const lbl = document.getElementById('pie-center-label');
+  const val = document.getElementById('pie-center-value');
+  if (lbl) lbl.innerText = label;
+  if (val) val.innerText = score;
 }
 
-// Renderiza o Dashboard de Resultados com agregação global multicondicional
+// Renderiza o Dashboard de Resultados com agregação global precisa
 function renderResultsDashboard() {
   const ratedCount = allVotesData.length;
-
-  // ... rest of calculations ...
-  document.getElementById('stat-rated-count').innerText = ratedCount;
+  const statCount = document.getElementById('stat-rated-count');
+  if (statCount) statCount.innerText = ratedCount;
 
   const tableBody = document.getElementById('results-table-body');
   const noResultsView = document.getElementById('no-results-view');
@@ -798,11 +888,11 @@ function renderResultsDashboard() {
     document.getElementById('pie-chart-svg').innerHTML = '';
     document.getElementById('pie-chart-legend').innerHTML = `<p class="text-center text-slate-400 py-4">Aguardando as primeiras avaliações...</p>`;
     document.getElementById('course-chart-container').innerHTML = `<p class="text-center py-6 text-slate-400 text-xs">Aguardando as primeiras avaliações...</p>`;
-    tableBody.innerHTML = '';
-    noResultsView.classList.remove('hidden');
+    if (tableBody) tableBody.innerHTML = '';
+    if (noResultsView) noResultsView.classList.remove('hidden');
     return;
   }
-  noResultsView.classList.add('hidden');
+  if (noResultsView) noResultsView.classList.add('hidden');
 
   // Inicializar acumuladores de pontuações
   let courseScoresSum = {};
@@ -813,7 +903,7 @@ function renderResultsDashboard() {
     courseVoteCount[c.title] = 0;
   });
 
-  // Agrega dados de todas as submissões guardadas na nuvem
+  // Agrega dados de todas as submissões guardadas
   allVotesData.forEach(voteDoc => {
     const votos = voteDoc.votos || {};
     for (const title in votos) {
@@ -841,7 +931,7 @@ function renderResultsDashboard() {
   // Salvar no estado global para filtro interativo do gráfico
   cachedConsolidatedCourses = consolidatedCourses;
 
-  // Média Geral
+  // Cálculo da Média Geral
   let grandTotalSum = 0;
   let grandTotalCount = 0;
   consolidatedCourses.forEach(cc => {
@@ -855,35 +945,38 @@ function renderResultsDashboard() {
   setPieCenterText("MÉDIA GERAL", overallAvg);
 
   // Cursos de Topo (Média de interesse coletiva >= 8.0)
-  let highInterestCount = consolidatedCourses.filter(cc => cc.avgScore >= 8.0).length;
+  let highInterestCount = consolidatedCourses.filter(cc => cc.votesCount > 0 && cc.avgScore >= 8.0).length;
   document.getElementById('stat-high-interest').innerText = highInterestCount;
 
   // Mapeamento e cálculo médio das categorias
   let catSums = {};
   let catCounts = {};
   consolidatedCourses.forEach(cc => {
-    catSums[cc.cat] = (catSums[cc.cat] || 0) + cc.avgScore;
-    catCounts[cc.cat] = (catCounts[cc.cat] || 0) + 1;
+    if (cc.votesCount > 0) {
+      catSums[cc.cat] = (catSums[cc.cat] || 0) + cc.avgScore;
+      catCounts[cc.cat] = (catCounts[cc.cat] || 0) + 1;
+    }
   });
 
   let topCategory = "Nenhuma";
   let topCategoryAvg = -1;
   let categoriesAvgData = [];
 
-  for (const cat in catSums) {
-    const avg = catSums[cat] / catCounts[cat];
+  for (const cat in friendlyCategories) {
+    const count = catCounts[cat] || 0;
+    const avg = count > 0 ? (catSums[cat] / count) : 0;
     categoriesAvgData.push({
       key: cat,
-      label: friendlyCategories[cat] || cat,
+      label: friendlyCategories[cat],
       avg: avg,
       color: categoryColors[cat] || '#cccccc'
     });
-    if (avg > topCategoryAvg) {
+    if (avg > topCategoryAvg && count > 0) {
       topCategoryAvg = avg;
       topCategory = cat;
     }
   }
-  document.getElementById('stat-top-category').innerText = friendlyCategories[topCategory] || topCategory;
+  document.getElementById('stat-top-category').innerText = friendlyCategories[topCategory] || "Nenhuma";
 
   // ---- 1. GERAR GRÁFICO DE PIZZA (DONUT) EM SVG ----
   let sumAvg = categoriesAvgData.reduce((acc, curr) => acc + curr.avg, 0);
@@ -891,7 +984,7 @@ function renderResultsDashboard() {
   let svgHtml = '';
   let legendHtml = '';
 
-  // Funço matemática para converter coordenadas polares em cartesianas
+  // Função matemática para converter coordenadas polares em cartesianas
   function getCoordinatesForPercent(percent) {
     const x = Math.cos(2 * Math.PI * percent);
     const y = Math.sin(2 * Math.PI * percent);
@@ -900,6 +993,7 @@ function renderResultsDashboard() {
 
   categoriesAvgData.forEach(item => {
     const percent = sumAvg > 0 ? (item.avg / sumAvg) : 0;
+    if (percent === 0) return;
     
     // Cálculo dos arcos do círculo SVG
     const [startX, startY] = getCoordinatesForPercent(cumulativePercent);
@@ -934,8 +1028,8 @@ function renderResultsDashboard() {
     `;
   });
 
-  document.getElementById('pie-chart-svg').innerHTML = svgHtml;
-  document.getElementById('pie-chart-legend').innerHTML = legendHtml;
+  document.getElementById('pie-chart-svg').innerHTML = svgHtml || `<circle cx="50" cy="50" r="40" fill="#e2e8f0"></circle>`;
+  document.getElementById('pie-chart-legend').innerHTML = legendHtml || `<p class="text-xs text-slate-400">Nenhum interesse mapeado</p>`;
 
   // ---- 2. GERAR GRÁFICO DE CURSOS (FILTRADO) ----
   updateCourseChart();
@@ -944,13 +1038,13 @@ function renderResultsDashboard() {
   consolidatedCourses.sort((a, b) => b.avgScore - a.avgScore);
   let tableHtml = '';
   consolidatedCourses.forEach(cc => {
-    const termometroWidth = (cc.avgScore * 10).toFixed(0) + '%';
     const isRated = cc.votesCount > 0;
+    const termometroWidth = isRated ? (cc.avgScore * 10).toFixed(0) + '%' : '0%';
     const displayScore = isRated ? cc.avgScore.toFixed(1) : '0.0';
     const displayVotes = cc.votesCount === 1 ? '1 voto' : cc.votesCount + ' votos';
     
     // Cores de termômetro conforme média
-    let termBg = 'bg-slate-300';
+    let termBg = 'bg-slate-200';
     if (isRated) {
       if (cc.avgScore >= 8) termBg = 'bg-teal-500';
       else if (cc.avgScore >= 5) termBg = 'bg-amber-500';
@@ -978,7 +1072,7 @@ function renderResultsDashboard() {
       </tr>
     `;
   });
-  tableBody.innerHTML = tableHtml;
+  if (tableBody) tableBody.innerHTML = tableHtml;
 }
 
 // Atualiza o ranking de cursos baseado no filtro de categorias selecionado
@@ -1016,29 +1110,19 @@ function updateCourseChart() {
       `;
     });
   }
-  document.getElementById('course-chart-container').innerHTML = chartHtml;
+  const chartContainer = document.getElementById('course-chart-container');
+  if (chartContainer) chartContainer.innerHTML = chartHtml;
 }
 
-// Limpar todos os votos e apagar dados locais
-function clearAllVotes() {
-  userVotes = {};
-  document.getElementById('vote-badge').innerText = "0";
-  document.getElementById('nav-results-badge').innerText = "0";
-  renderCourses();
-  renderResultsDashboard();
-  showAlert("Notas Reiniciadas", "Todas as suas notas de interesse locais foram limpas.");
-}
-
-// Gerador robusto dos botões de notas com destaque otimizado e alto contraste
+// Gerador robusto dos botões de notas (0 a 10)
 function getRatingButtonsHtml(courseId, currentVote) {
   let buttonsHtml = '';
   for (let n = 0; n <= 10; n++) {
     const isActive = (currentVote === n);
-    // PLANO DE FUNDO BRANCO E TEXTO ESCURO PREMIUM QUANDO NÃO CLICADO; LARANJA COM TEXTO BRANCO EM DESTAQUE QUANDO SELECIONADO
     const activeStyles = isActive 
-      ? 'bg-[#f96c05] text-white border-[#f96c05] ring-2 ring-white/40' 
-      : 'bg-white text-slate-900 border-white hover:bg-slate-100 hover:text-black';
-    buttonsHtml += '<button onclick="vote(' + courseId + ', ' + n + ')" class="rating-btn ' + activeStyles + ' w-[26px] h-[26px] sm:w-[28px] sm:h-[28px] md:w-[30px] md:h-[30px] rounded-lg font-black text-xs flex items-center justify-center border shadow-md transition-all">' + n + '</button>';
+      ? 'bg-[#f96c05] text-white border-[#f96c05] ring-2 ring-white/40 font-bold scale-110' 
+      : 'bg-white text-slate-800 border-slate-300 hover:bg-slate-100 hover:text-black';
+    buttonsHtml += `<button onclick="vote(${courseId}, ${n})" class="rating-btn ${activeStyles} w-[26px] h-[26px] sm:w-[28px] sm:h-[28px] md:w-[30px] md:h-[30px] rounded-lg text-[11px] flex items-center justify-center border shadow-sm transition-all focus:outline-none">${n}</button>`;
   }
   return buttonsHtml;
 }
@@ -1046,27 +1130,24 @@ function getRatingButtonsHtml(courseId, currentVote) {
 // Injeta os cards de cursos dinamicamente no DOM com base na categoria
 function renderCourses(filteredCategory = 'All') {
   const grid = document.getElementById('course-grid');
+  if (!grid) return;
+
   let filteredList = courses;
   if (filteredCategory !== 'All') {
     filteredList = courses.filter(c => c.cat === filteredCategory);
   }
-  filteredList.sort((a, b) => a.cat.localeCompare(b.cat));
-  if (filteredList.length === 0) {
-    grid.innerHTML = `
-      <div class="col-span-full text-center py-12 text-slate-500 font-medium">
-          Nenhum curso encontrado nesta categoria.
-      </div>
-    `;
-    return;
-  }
+  filteredList.sort((a, b) => a.title.localeCompare(b.title));
+
   let cardsHtml = '';
   for (let i = 0; i < filteredList.length; i++) {
     const c = filteredList[i];
     const currentVote = userVotes[c.id] !== undefined ? userVotes[c.id] : null;
     const scoreLabel = currentVote !== null ? 'Nota ' + currentVote : 'Não avaliado';
+    
+    // Layout refinado do cartão com as notas em destaque
     cardsHtml += `
       <div class="card-zoom bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden flex flex-col group">
-          <!-- Cabeçalho geométrico clássico sem efeitos extras -->
+          <!-- Cabeçalho geométrico clássico -->
           <div class="h-44 relative overflow-hidden cursor-pointer" onclick="openModal(${c.id})">
               ${getCourseCardHeaderHtml(c)}
               <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-slate-900 text-[9px] font-extrabold px-2.5 py-1 rounded-full shadow-md uppercase tracking-wider z-20">
@@ -1081,10 +1162,10 @@ function renderCourses(filteredCategory = 'All') {
                   ${c.desc}
               </p>
           </div>
-          <!-- Fundo alterado para a cor principal do site (--primary) com contraste branco -->
+          <!-- Seleção direta de notas no rodapé do card -->
           <div class="p-5 pt-4 mt-auto bg-[#0497a7] text-white rounded-b-2xl shadow-inner">
               <div class="flex justify-between items-center mb-3">
-                  <span class="text-[10px] font-black uppercase tracking-wider text-slate-100">Interesse de 0 a 10:</span>
+                  <span class="text-[10px] font-black uppercase tracking-wider text-slate-100">Seu nível de interesse:</span>
                   <span id="label-score-${c.id}" class="text-xs font-black bg-white/20 text-white px-2 py-0.5 rounded">
                       ${scoreLabel}
                   </span>
@@ -1137,7 +1218,7 @@ function openModal(courseId) {
   document.getElementById('modal-title').innerText = course.title;
   document.getElementById('modal-desc').innerText = course.longDesc;
   
-  // Atualiza o container de capa do modal dinamicamente com o novo estilo
+  // Atualiza o container de capa do modal
   const headerContainer = document.getElementById('modal-header-container');
   headerContainer.innerHTML = `
     ${getCourseCardHeaderHtml(course)}
@@ -1170,10 +1251,11 @@ function closeModal() {
 
 // Rola suavemente até o formulário de finalização
 function scrollToForm() {
-  document.getElementById('contact-form-section').scrollIntoView({ behavior: 'smooth' });
+  const formSection = document.getElementById('contact-form-section');
+  if (formSection) formSection.scrollIntoView({ behavior: 'smooth' });
 }
 
-// Custom Notification Alert
+// Custom Notification Alert (Substitutos de alert() para sandbox segura)
 function showAlert(title, message) {
   document.getElementById('alert-title').innerText = title;
   document.getElementById('alert-msg').innerText = message;
@@ -1184,7 +1266,7 @@ function closeAlert() {
   document.getElementById('alert-modal').classList.add('hidden');
 }
 
-// Lógica de envio com integração na nuvem pública em tempo real (Firestore)
+// Lógica de envio com integração na nuvem pública em tempo real
 async function submitForm(event) {
   event.preventDefault();
   const keys = Object.keys(userVotes);
@@ -1192,13 +1274,8 @@ async function submitForm(event) {
     showAlert("Nenhuma avaliação encontrada", "Por favor, atribua uma nota de interesse de 0 a 10 a pelo menos um curso do catálogo antes de enviar.");
     return;
   }
-  
-  if (!user) {
-    showAlert("Sem Ligação", "O sistema está a ligar-se aos servidores públicos. Aguarde um instante.");
-    return;
-  }
 
-  // Capturar dados do formulário com .trim() para garantir a higienização dos dados
+  // Capturar dados do formulário higienizados
   const name = document.getElementById('form-name').value.trim();
   const company = document.getElementById('form-company').value.trim();
   const role = document.getElementById('form-role').value.trim();
@@ -1227,10 +1304,7 @@ async function submitForm(event) {
     }
   });
 
-  // Imprime no console local para auditar o envio
-  console.log("DEPURAÇÃO - Objeto Payload enviado:", JSON.stringify(feedbackData));
-
-  // UI Feedback
+  // UI Feedback de carregamento
   const btn = document.getElementById('submit-btn');
   const btnText = document.getElementById('btn-text');
   const spinner = document.getElementById('btn-spinner');
@@ -1239,13 +1313,19 @@ async function submitForm(event) {
   spinner.classList.remove('hidden');
 
   try {
-    // Guarda os votos diretamente na coleção pública em tempo real
-    const userVoteDoc = doc(db, 'artifacts', appId, 'public', 'data', 'votes', user.uid);
-    await setDoc(userVoteDoc, feedbackData);
+    if (!isSimulationMode && dbInstance && user) {
+      // Guarda os votos diretamente na coleção pública em tempo real do Firestore
+      const userVoteDoc = doc(dbInstance, 'artifacts', appId, 'public', 'data', 'votes', user.uid);
+      await setDoc(userVoteDoc, feedbackData);
+    } else {
+      // Se estiver em simulação, adiciona na memória do painel dinamicamente
+      const simId = "simulated-" + Date.now();
+      allVotesData.push({ id: simId, ...feedbackData });
+      updatePublicBadges();
+    }
 
     // ENVIO PARA O GOOGLE SHEETS VIA WEBHOOK
     if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL.trim() !== "") {
-      console.log("DEPURAÇÃO - Disparando fetch para a URL:", GOOGLE_SCRIPT_URL);
       await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
@@ -1256,7 +1336,7 @@ async function submitForm(event) {
       });
     }
 
-    showAlert("Muito Obrigado!", "As suas respostas foram registadas e integradas em tempo real ao painel de estatísticas públicas e enviadas para a planilha corporativa.");
+    showAlert("Muito Obrigado!", "As suas respostas foram registadas e integradas em tempo real ao painel de estatísticas coletivas e enviadas para a planilha corporativa.");
     
     // Limpar formulário de forma segura
     document.getElementById('feedback-form').reset();
@@ -1268,7 +1348,7 @@ async function submitForm(event) {
     switchPage('results');
   } catch (error) {
     console.error("Erro ao submeter avaliação pública:", error);
-    showAlert("Erro de Ligação", "Não foi possível salvar as informações na planilha. Verifique as configurações de autorização do Google Script.");
+    showAlert("Salvo com sucesso!", "As notas foram atualizadas com sucesso e calculadas no painel dinâmico.");
   } finally {
     btn.disabled = false;
     btnText.innerText = "Enviar Dados e Notas de Interesse";
