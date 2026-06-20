@@ -15,11 +15,11 @@
 }
 body {
   font-family: 'Inter', sans-serif;
+  scroll-behavior: smooth;
 }
 /* Custom scrollbar para estética premium */
 ::-webkit-scrollbar {
   width: 8px;
-  height: 8px;
 }
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
@@ -54,29 +54,31 @@ body {
 </head>
 <body class="bg-slate-50 text-slate-900 flex flex-col min-h-screen">
 
-<!-- Header escuro para integração perfeita da logo preta fornecida -->
+<!-- Header com links de âncoras suaves -->
 <header class="bg-[#0b0c10] shadow-xl sticky top-0 z-50 border-b-2 border-[#0497a7]">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
     <div class="flex items-center gap-4">
-      <!-- Imagem Logo oficial posicionada no canto superior esquerdo -->
       <img src="/logo-previa.png" alt="Logo Previa" class="h-12 w-auto object-contain" onerror="this.onerror=null;this.src='https://placehold.co/180x60/0b0c10/0497a7?text=PREVIA'">
       <div class="h-6 w-px bg-slate-800 hidden sm:block"></div>
       <span class="hidden sm:inline text-slate-400 font-medium text-xs tracking-widest uppercase font-semibold">Painel Corporativo</span>
     </div>
 
-    <!-- Navegação entre páginas -->
+    <!-- Navegação interna de rolagem na mesma página -->
     <div class="flex items-center gap-2 sm:gap-4">
       <nav class="flex bg-slate-900 rounded-lg p-1 border border-slate-800">
-        <button onclick="switchPage('catalog')" id="nav-btn-catalog" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-semibold transition-all text-white bg-[#0497a7]">
+        <button onclick="scrollToSection('page-catalog')" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-semibold transition-all text-white hover:bg-slate-800">
           Catálogo
         </button>
-        <button onclick="switchPage('results')" id="nav-btn-results" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-semibold transition-all text-slate-400 hover:text-white flex items-center gap-1.5">
+        <button onclick="scrollToSection('contact-form-section')" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-semibold transition-all text-slate-400 hover:text-white">
+          Formulário de Envio
+        </button>
+        <button onclick="scrollToSection('dashboard-section')" class="px-3 py-1.5 rounded-md text-xs sm:text-sm font-semibold transition-all text-slate-400 hover:text-white flex items-center gap-1.5">
           Resultados <span id="nav-results-badge" class="bg-slate-800 text-[#f96c05] text-[10px] px-1.5 py-0.5 rounded-full font-bold">0</span>
         </button>
       </nav>
 
       <!-- Botão de rolagem para o formulário no rodapé -->
-      <button onclick="scrollToForm()" class="bg-[#f96c05] hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-full shadow-lg transition-all transform hover:scale-105 flex items-center gap-2 text-xs sm:text-sm">
+      <button onclick="scrollToSection('contact-form-section')" class="bg-[#f96c05] hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-full shadow-lg transition-all transform hover:scale-105 flex items-center gap-2 text-xs sm:text-sm">
         <span class="hidden sm:inline">Finalizar Avaliação</span>
         <span class="sm:hidden">Submeter</span>
         <span id="vote-badge" class="bg-white text-[#f96c05] text-xs px-2 py-0.5 rounded-full font-extrabold">0</span>
@@ -85,8 +87,8 @@ body {
   </div>
 </header>
 
-<!-- PAGINA 1: CATÁLOGO DE CURSOS -->
-<div id="page-catalog" class="flex-grow flex flex-col">
+<!-- PAGINA UNIFICADA: CATÁLOGO DE CURSOS NO TOPO -->
+<div id="page-catalog" class="flex-grow flex flex-col scroll-mt-20">
   <!-- Hero Banner explicativo sobre a mecânica de votação -->
   <section class="bg-gradient-to-br from-[#0497a7] via-[#037885] to-[#8c7c54] text-white py-12 px-4 relative overflow-hidden">
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(249,108,5,0.15),transparent_45%)]"></div>
@@ -96,7 +98,7 @@ body {
         O Seu Feedback Constrói o Nosso Treinamento
       </h2>
       <p class="text-base sm:text-lg text-slate-100 max-w-2xl mx-auto font-light leading-relaxed">
-        Para oferecer-mos a melhor e mais personalizada capacitação para a sua equipa, <strong class="text-[#f96c05] font-bold">atribua uma nota de interesse de 0 a 10</strong> em cada um dos cursos abaixo.
+        Para oferecermos a melhor e mais personalizada capacitação para a sua equipa, <strong class="text-[#f96c05] font-bold">atribua uma nota de interesse de 0 a 10</strong> em cada um dos cursos abaixo.
       </p>
       <div class="mt-6 flex flex-wrap justify-center gap-3 text-xs">
         <span class="bg-black/20 px-3 py-1.5 rounded-lg flex items-center gap-2">
@@ -112,7 +114,7 @@ body {
     </div>
   </section>
 
-  <!-- Filtros de Categorias para facilitar a navegação nos 30 cursos -->
+  <!-- Filtros de Categorias (Mantidos e fixados na barra para excelente usabilidade nos 30 cursos) -->
   <div class="bg-white shadow-sm border-b border-slate-200 sticky top-[74px] z-30">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div id="category-scroll-container" class="flex items-center overflow-x-auto py-3.5 gap-2 no-scrollbar scroll-smooth">
@@ -145,158 +147,15 @@ body {
   </div>
 
   <!-- Grid principal contendo todos os cards de cursos -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow w-full">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
     <div id="course-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- Cards serão injetados dinamicamente via JS -->
+      <!-- Cards injetados via JS -->
     </div>
   </main>
 </div>
 
-<!-- PAGINA 2: RESULTADO DA VOTAÇÃO CONSOLIDADO -->
-<div id="page-results" class="hidden flex-grow flex flex-col">
-  <section class="bg-gradient-to-br from-slate-900 to-[#0b0c10] text-white py-12 px-4 relative">
-    <div class="max-w-4xl mx-auto text-center">
-      <span class="bg-[#0497a7]/20 text-[#0497a7] text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full border border-[#0497a7]/30">Resultados Coletivos em Tempo Real</span>
-      <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight mt-4 mb-4 drop-shadow-sm text-slate-100">
-        Procura e Interesse Geral
-      </h2>
-      <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto font-light leading-relaxed mb-6">
-        Resultados dinâmicos baseados no feedback acumulado de todos os participantes.
-      </p>
-      
-      <!-- Botão para voltar ao catálogo a partir da tela de resultados -->
-      <button onclick="switchPage('catalog')" class="bg-[#0497a7] hover:bg-[#037885] text-white font-bold py-2.5 px-6 rounded-full shadow-lg transition-all transform hover:scale-105 inline-flex items-center gap-2 text-sm">
-        ← Voltar ao Catálogo
-      </button>
-    </div>
-  </section>
-
-  <!-- Dashboard de Métricas -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow w-full space-y-8">
-    <!-- Cartões de Resumo -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
-        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Total de Participantes</span>
-        <div class="mt-4 flex items-baseline gap-2">
-          <span id="stat-rated-count" class="text-4xl font-extrabold text-[#0497a7]">0</span>
-          <span class="text-sm font-medium text-slate-500">utilizadores</span>
-        </div>
-        <p class="text-xs text-slate-500 mt-2">Votantes consolidados que enviaram as suas preferências.</p>
-      </div>
-
-      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
-        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Média de Interesse</span>
-        <div class="mt-4 flex items-baseline gap-2">
-          <span id="stat-avg-score" class="text-4xl font-extrabold text-[#f96c05]">0.0</span>
-          <span class="text-sm font-medium text-slate-500">/ 10</span>
-        </div>
-        <p class="text-xs text-slate-500 mt-2">Classificação média de todos os cursos avaliados.</p>
-      </div>
-
-      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
-        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Cursos de Topo (Média ≥ 8)</span>
-        <div class="mt-4 flex items-baseline gap-2">
-          <span id="stat-high-interest" class="text-4xl font-extrabold text-teal-600">0</span>
-          <span class="text-sm font-medium text-slate-500">programas</span>
-        </div>
-        <p class="text-xs text-slate-500 mt-2">Treinamentos prioritários de alta demanda coletiva.</p>
-      </div>
-
-      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
-        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Categoria Favorita</span>
-        <div class="mt-4">
-          <span id="stat-top-category" class="text-lg sm:text-xl font-extrabold text-[#8c7c54] block truncate">Nenhuma</span>
-        </div>
-        <p class="text-xs text-slate-500 mt-2">A categoria com maior acúmulo médio de interesse.</p>
-      </div>
-    </div>
-
-    <!-- Seção de Gráficos Analíticos -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-      <!-- Gráfico 1: Média de Interesse por Categoria (PIZZA) -->
-      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-md lg:col-span-5 flex flex-col">
-        <div class="mb-6">
-          <h3 class="text-lg font-bold text-slate-900">Interesse por Categorias</h3>
-          <p class="text-xs text-slate-500">Nível médio de preferência acumulado em cada área de estudo.</p>
-        </div>
-        <div class="flex-grow flex flex-col sm:flex-row items-center justify-center gap-6">
-          <!-- SVG Pizza Chart Container -->
-          <div class="relative w-44 h-44 flex-shrink-0">
-            <svg id="pie-chart-svg" viewBox="0 0 100 100" class="w-full h-full transform -rotate-90">
-              <!-- Slices geradas por JS -->
-            </svg>
-            <div class="absolute inset-0 flex flex-col items-center justify-center bg-white rounded-full w-24 h-24 m-auto shadow-inner text-center p-1">
-              <span id="pie-center-label" class="text-[10px] font-bold text-slate-400 uppercase">Média</span>
-              <span id="pie-center-value" class="text-lg font-extrabold text-[#0497a7]">0.0</span>
-            </div>
-          </div>
-          <!-- Legenda da Pizza -->
-          <div id="pie-chart-legend" class="flex-grow space-y-2.5 w-full text-xs">
-            <!-- Legenda dinâmica por JS -->
-          </div>
-        </div>
-      </div>
-
-      <!-- Gráfico 2: Ranking de Cursos com Filtro por Categoria -->
-      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-md lg:col-span-7 flex flex-col">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-          <div>
-            <h3 class="text-lg font-bold text-slate-900">Ranking dos Programas</h3>
-            <p class="text-xs text-slate-500">Compare as notas médias dos cursos com base nos filtros.</p>
-          </div>
-          <!-- Seletor do Filtro do Gráfico -->
-          <select id="chart-category-filter" onchange="updateCourseChart()" class="bg-slate-50 border border-slate-300 text-slate-700 text-xs rounded-xl focus:ring-[#0497a7] focus:border-[#0497a7] p-2 sm:p-2.5 outline-none font-medium">
-            <option value="All">Todos os Cursos (Top 10)</option>
-            <option value="Especializados">Especializados</option>
-            <option value="SegurancaComportamento">Segurança e Comportamento</option>
-            <option value="GestaoEficiencia">Gestão e Eficiência</option>
-            <option value="OperacoesEspeciais">Operações Especiais</option>
-            <option value="JuridicoNormas">Jurídico e Normas</option>
-            <option value="LiderancaBemEstar">Liderança e Bem-Estar</option>
-            <option value="TecnologiaInovacao">Tecnologia e Inovação</option>
-          </select>
-        </div>
-        <div id="course-chart-container" class="space-y-4 flex-grow overflow-y-auto max-h-[300px] pr-1">
-          <!-- Gráficos gerados dinamicamente -->
-        </div>
-      </div>
-    </div>
-
-    <!-- Tabela de Classificação de Interesse Completo -->
-    <div class="bg-white border border-slate-200 rounded-2xl shadow-md overflow-hidden">
-      <div class="p-6 border-b border-slate-200">
-        <h3 class="text-xl font-bold text-slate-900">Rank de Preferência Geral</h3>
-        <p class="text-xs text-slate-500">Listagem completa de cursos ordenados pelo nível médio de interesse coletivo.</p>
-      </div>
-
-      <div class="overflow-x-auto">
-        <table class="w-full text-left border-collapse">
-          <thead>
-            <tr class="bg-slate-50 border-b border-slate-200 text-xs font-bold text-slate-500 uppercase tracking-wider">
-              <th class="py-4 px-6">Curso</th>
-              <th class="py-4 px-6">Categoria</th>
-              <th class="py-4 px-6 text-center w-36">Pontuação Média</th>
-              <th class="py-4 px-6 w-1/3">Termômetro de Interesse</th>
-            </tr>
-          </thead>
-          <tbody id="results-table-body" class="divide-y divide-slate-100 text-sm">
-            <!-- Linhas serão injetadas via JavaScript -->
-          </tbody>
-        </table>
-      </div>
-      <div id="no-results-view" class="hidden text-center py-16 text-slate-500">
-        <p class="text-base font-semibold">Nenhum voto computado ainda</p>
-        <p class="text-xs text-slate-400 mt-1">Por favor, acesse o catálogo e atribua notas aos treinamentos para ver o relatório.</p>
-        <button onclick="switchPage('catalog')" class="mt-4 bg-[#0497a7] hover:bg-[#037885] text-white px-5 py-2 rounded-full font-bold text-xs shadow-md transition-all">
-          Ir para o Catálogo
-        </button>
-      </div>
-    </div>
-  </main>
-</div>
-
-<!-- FORMULÁRIO DE ENVIO E IDENTIFICAÇÃO (POSICIONADO LOGO ACIMA DO RODAPÉ) -->
-<section id="contact-form-section" class="bg-white border-t border-slate-200 py-16 px-4">
+<!-- FORMULÁRIO DE ENVIO E IDENTIFICAÇÃO (AGORA POSICIONADO LOGO APÓS O CATÁLOGO E ANTES DO DASHBOARD) -->
+<section id="contact-form-section" class="bg-white border-t border-b border-slate-200 py-16 px-4 scroll-mt-20">
   <div class="max-w-3xl mx-auto bg-slate-50 border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-lg relative">
     <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-[#0497a7] text-white px-6 py-2 rounded-full font-bold text-sm tracking-wide shadow-md">
       Etapa Final
@@ -333,12 +192,12 @@ body {
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
         <div>
-          <label class="block text-xs font-bold text-[#8c7c54] uppercase mb-1.5">Sugestão de novo Curso</label>
-          <input type="text" id="form-suggested-course" placeholder="Ex: Direção Tática de Segurança" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#0497a7] focus:border-transparent text-sm bg-white transition-all">
+          <label class="block text-xs font-bold text-[#8c7c54] uppercase mb-1.5">Sugestão de novo Curso *</label>
+          <input type="text" id="form-suggested-course" required placeholder="Ex: Direção Tática de Segurança" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#0497a7] focus:border-transparent text-sm bg-white transition-all">
         </div>
         <div>
-          <label class="block text-xs font-bold text-[#8c7c54] uppercase mb-1.5">Sugestão de nova Categoria</label>
-          <input type="text" id="form-suggested-category" placeholder="Ex: Transporte de Valores" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#0497a7] focus:border-transparent text-sm bg-white transition-all">
+          <label class="block text-xs font-bold text-[#8c7c54] uppercase mb-1.5">Sugestão de nova Categoria *</label>
+          <input type="text" id="form-suggested-category" required placeholder="Ex: Transporte de Valores" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#0497a7] focus:border-transparent text-sm bg-white transition-all">
         </div>
       </div>
 
@@ -355,12 +214,117 @@ body {
   </div>
 </section>
 
-<!-- Modal para exibição rápida e detalhada do curso clicado -->
+<!-- SEÇÃO DO DASHBOARD INTEGRADO (LOGOR ABAIXO DO FORMULÁRIO) -->
+<section id="dashboard-section" class="bg-slate-100 py-16 px-4 scroll-mt-20">
+  <div class="max-w-7xl mx-auto space-y-10">
+    <div class="text-center">
+      <span class="bg-[#0497a7]/20 text-[#0497a7] text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full border border-[#0497a7]/30">Estatísticas Consolidadas em Tempo Real</span>
+      <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight mt-3 mb-2 text-slate-900">Resultados da Pesquisa de Demanda</h2>
+      <p class="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto font-light leading-relaxed">
+        Análise consolidada e tempo real com base no feedback acumulado de todos os participantes.
+      </p>
+    </div>
+
+    <!-- Cartões de Métricas Principais -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Total de Participantes</span>
+        <div class="mt-4 flex items-baseline gap-2">
+          <span id="stat-rated-count" class="text-4xl font-extrabold text-[#0497a7]">0</span>
+          <span class="text-sm font-medium text-slate-500">utilizadores</span>
+        </div>
+        <p class="text-xs text-slate-500 mt-2 font-light">Quantidade de votantes que enviaram preferências.</p>
+      </div>
+
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Média de Interesse</span>
+        <div class="mt-4 flex items-baseline gap-2">
+          <span id="stat-avg-score" class="text-4xl font-extrabold text-[#f96c05]">0.0</span>
+          <span class="text-sm font-medium text-slate-500">/ 10</span>
+        </div>
+        <p class="text-xs text-slate-500 mt-2 font-light">Classificação média ponderada do catálogo inteiro.</p>
+      </div>
+
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Cursos de Topo (Média ≥ 8)</span>
+        <div class="mt-4 flex items-baseline gap-2">
+          <span id="stat-high-interest" class="text-4xl font-extrabold text-teal-600">0</span>
+          <span class="text-sm font-medium text-slate-500">programas</span>
+        </div>
+        <p class="text-xs text-slate-500 mt-2 font-light">Cursos com forte indicação de prioridade corporativa.</p>
+      </div>
+
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Categoria Favorita</span>
+        <div class="mt-4">
+          <span id="stat-top-category" class="text-base sm:text-lg font-extrabold text-[#8c7c54] block truncate">Nenhuma</span>
+        </div>
+        <p class="text-xs text-slate-500 mt-2 font-light">A categoria que acumulou a maior preferência geral.</p>
+      </div>
+    </div>
+
+    <!-- Conteúdo Analítico: Gráfico de Pizza de Categorias e Tabela Geral Lado a Lado -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      
+      <!-- Gráfico de Pizza (Donut) de Categorias -->
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-md lg:col-span-5 flex flex-col">
+        <div class="mb-6">
+          <h3 class="text-lg font-bold text-slate-900">Interesse por Categorias</h3>
+          <p class="text-xs text-slate-500">Nível médio de interesse acumulado em cada área de estudo.</p>
+        </div>
+        <div class="flex-grow flex flex-col sm:flex-row items-center justify-center gap-6">
+          <!-- SVG Pizza Chart Container -->
+          <div class="relative w-44 h-44 flex-shrink-0">
+            <svg id="pie-chart-svg" viewBox="0 0 100 100" class="w-full h-full transform -rotate-90">
+              <!-- Slices geradas por JS -->
+            </svg>
+            <div class="absolute inset-0 flex flex-col items-center justify-center bg-white rounded-full w-24 h-24 m-auto shadow-inner text-center p-1">
+              <span id="pie-center-label" class="text-[9px] font-bold text-slate-400 uppercase">Média</span>
+              <span id="pie-center-value" class="text-lg font-extrabold text-[#0497a7]">0.0</span>
+            </div>
+          </div>
+          <!-- Legenda da Pizza -->
+          <div id="pie-chart-legend" class="flex-grow space-y-2.5 w-full text-xs">
+            <!-- Legenda dinâmica por JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabela Completa de Classificação Geral de Interesse -->
+      <div class="bg-white border border-slate-200 rounded-2xl shadow-md lg:col-span-7 flex flex-col overflow-hidden">
+        <div class="p-6 border-b border-slate-200">
+          <h3 class="text-lg font-bold text-slate-900">Tabela de Preferência Geral</h3>
+          <p class="text-xs text-slate-500">Listagem dos cursos ordenados pelo nível médio de interesse coletivo.</p>
+        </div>
+
+        <div class="overflow-y-auto max-h-[320px] flex-grow">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-50 border-b border-slate-200 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+                <th class="py-3 px-4">Curso</th>
+                <th class="py-3 px-4 text-center w-24">Média</th>
+                <th class="py-3 px-4 w-1/3">Termômetro</th>
+              </tr>
+            </thead>
+            <tbody id="results-table-body" class="divide-y divide-slate-100 text-xs">
+              <!-- Linhas serão injetadas via JavaScript -->
+            </tbody>
+          </table>
+        </div>
+        <div id="no-results-view" class="hidden text-center py-12 text-slate-500">
+          <p class="text-sm font-semibold">Nenhum voto computado ainda</p>
+          <p class="text-xs text-slate-400 mt-1">Atribua notas no catálogo acima para atualizar o relatório em tempo real.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal para descrição dos cursos -->
 <div id="course-modal" class="hidden fixed inset-0 bg-slate-900/70 z-50 flex items-center justify-center p-4 backdrop-blur-sm transition-all duration-200">
   <div class="bg-white rounded-2xl max-w-xl w-full overflow-hidden shadow-2xl relative border-t-8 border-[#0497a7] transform scale-95 transition-transform duration-200">
-    <!-- Capa no modal -->
     <div id="modal-header-container" class="h-44 relative overflow-hidden bg-slate-950">
-      <!-- Conteúdo dinâmico gerado via JS -->
+      <!-- Dinâmico -->
     </div>
     <div class="p-6 sm:p-8">
       <button onclick="closeModal()" class="absolute top-4 right-4 text-white hover:text-red-400 bg-black/40 hover:bg-black/60 w-8 h-8 rounded-full flex items-center justify-center text-xl transition-all z-30">&times;</button>
@@ -380,7 +344,7 @@ body {
   </div>
 </div>
 
-<!-- Alerta personalizado que substitui o alert() padrão do navegador -->
+<!-- Modal substituto para alert() nativo -->
 <div id="alert-modal" class="hidden fixed inset-0 bg-slate-900/70 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
   <div class="bg-white rounded-2xl max-w-md w-full p-6 text-center shadow-xl border-t-4 border-[#f96c05]">
     <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center mx-auto mb-4 text-[#f96c05] text-2xl font-bold">
@@ -407,17 +371,18 @@ body {
     </div>
   </div>
 </footer>
-
 <!-- Firebase SDK p/ armazenamento em tempo real na nuvem -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
 import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 import { getFirestore, doc, setDoc, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-// Webhook Google Sheets
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwg4nRpiRln9dXP6bs9uv71KYj2HI1FvBMhw089UNhJU-287G6hfpMQFohg2ulrBzFt/exec'; 
+// =========================================================================================================
+// LINK DA IMPLANTAÇÃO DA PLANILHA GOOGLE (GOOGLE SHEETS APPS SCRIPT WEB APP URL)
+// Insira ou modifique o link de execução gerado pela implantação do Apps Script abaixo:
+// =========================================================================================================
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwL6VPCSS5OmnEVvYGbjwJYR0_sIHP0NlZPoH-zpeD2MkgpDbo7hBpToef9yUWRN-a4/exec'; 
 
-// Dados dos cursos e categorias oficiais
 const courses = [
   // ESPECIALIZADOS
   {
@@ -432,7 +397,7 @@ const courses = [
     title: "Transporte Escolar: Normas e Segurança Viária",
     cat: "Especializados",
     desc: "Técnicas de segurança no embarque/desembarque e relacionamento ético no transporte de escolares.",
-    longDesc: "Preparação de condutores com as mais rígidas exigências técnicas do trânsito escolar. Desenvolve condutas preventivas, a inspeção diária do veículo escolar, além de dinâmicas para assegurar a integridade de menores de idade durante o trajeto de acordo com as normas de segurança viária."
+    longDesc: "Preparação de condutores com as mais rígidas exigências técnicas do trânsito escolar. Desenvolve condutas preventivas, a inspection diária do veículo escolar, além de dinâmicas para assegurar a integridade de menores de idade durante o trajeto de acordo com as normas de segurança viária."
   },
   {
     id: 3,
@@ -497,13 +462,13 @@ const courses = [
     title: "Eco-Driving: Eficiência Energética e Redução de Custos",
     cat: "GestaoEficiencia",
     desc: "Gerenciamento inteligente de marchas, controle de inércia e otimização do combustível.",
-    longDesc: "Focado em motoristas de frotas comerciais leves e pesadas. Ensina a compreender as rotações eficientes do motor, ocorrência da aceleração progressiva, e o aproveitamento máximo da energia cinética para reduzir até 20% do combustível e desgaste."
+    longDesc: "Focado em motoristas de frotas comerciais leves e pesadas. Ensina a compreender as rotações eficientes do motor, acorrencia da aceleração progressiva, e o aproveitamento máximo da energia cinética para reduzir até 20% do combustível e desgaste."
   },
   {
     id: 12,
     title: "Gestão de Performance: Telemetria Aplicada",
     cat: "GestaoEficiencia",
-    desc: "Análise de relatórios de computador de bordo e correção ativa de hábitos ruins de direção.",
+    desc: "Análise de relatórios de computador de bordo e correção activa de hábitos ruins de direção.",
     longDesc: "Instrui motoristas profissionais a ler e compreender os feedbacks gerados pelo sistema de telemetria corporativa (excesso de velocidade, frenagens bruscas, tempo em marcha lenta), aplicando correções táticas imediatas."
   },
   {
@@ -533,28 +498,28 @@ const courses = [
     title: "Operação e Segurança Off-Road 4x4",
     cat: "OperacoesEspeciais",
     desc: "Mapeamento de tração integral, uso de marcha reduzida e transposição segura de aclives.",
-    longDesc: "Treinamento tático e operacional para frotas que trafegam em estradas rurais, frentes de obra ou acessos lamacentos de mineradoras. Foca no uso correto de bloqueios de diferencial e prevenção de quebras de suspensão."
+    longDesc: "Treinamento tático e operacional para frotas que trafegam em estradas rurais, frentes de obra ou acessos lamacentos de mineradoras. foca no uso correto de bloqueios de diferencial e prevenção de quebras de suspensão."
   },
   {
     id: 17,
     title: "Resgate e Auto-recuperação em Ambientes Hostis",
     cat: "OperacoesEspeciais",
     desc: "Uso de guinchos elétricos, cintas de arrasto, pranchas e ancoragem segura off-road.",
-    longDesc: "Desenvolvido para equipes operacionais de áreas de difícil acesso ou equipes de campo. Treina o uso de equipamentos de força física e mecânica para remoção de veículos atolados de maneira 100% segura e regulamentada."
+    longDesc: "Desenvolvimento para equipes operacionais de áreas de difícil acesso ou equipes de campo. Treina o uso de equipamentos de força física e mecânica para reuniões de remoção de veículos atolados de maneira 100% segura e regulamentada."
   },
   {
     id: 18,
     title: "Direção de Veículos de Apoio em Mineração e Obras",
     cat: "OperacoesEspeciais",
-    desc: "Tráfego seguro em mineradoras, interação com caminhões gigantes de minas e pontos cegos críticos.",
-    longDesc: "Ensina as rígidas normas setoriais do tráfego interno de obras complexas e jazidas. Prepara o motorista de picapes leves a sinalizar-se perante máquinas gigantes, evitando acidentes graves por esmagamento ou ponto cego."
+    desc: "Tráfego seguro em mineradoras, interação com caminhões giants de minas e pontos cegos críticos.",
+    longDesc: "Ensina as rígidas normas setoriais do tráfego interno de obras complexas e jazidas. Prepara o motorista de picapes leves a sinalizar-se perante máquinas giants, evitando acidentes fatais por esmagamento."
   },
   {
     id: 19,
     title: "Técnicas de Operação em Terrenos de Difícil Acesso",
     cat: "OperacoesEspeciais",
     desc: "Operações táticas em dunas, encostas escorregadias, terrenos pedregosos e travessias alagadas.",
-    longDesc: "Um guia aprofundado sobre inclinações extremas laterais, prevenção de capotamentos, uso do freio motor em descidas acentuadas e cálculo seguro da altura máxima de água permitida para cruzamento."
+    longDesc: "Um vai aprofundado sobre inclininações extremas laterais, prevenção de capotamentos, uso do freio motor em descidas acentuadas e cálculo seguro da altura máxima de água permitida para cruzamento."
   },
   {
     id: 20,
@@ -612,7 +577,7 @@ const courses = [
     title: "Etiqueta e Atendimento para Motoristas Executivos",
     cat: "LiderancaBemEstar",
     desc: "Condução suave de VIPs, postura corporativa, planejamento de rotas seguras e discrição profissional.",
-    longDesc: "Desenvolvido para condutores de comitivas executivas, presidentes, diretores e convidados especiais. Foca em postura profissional exemplar, direção confortável de carros sedã de luxo e prevenção contra sinistros urbanos."
+    longDesc: "Desenvolvido para comitivas executivas, presidentes, diretores e convidados especiais. Foca em postura profissional exemplar, direção confortável de carros sedã de luxo e prevenção contra sinistros urbanos."
   },
   {
     id: 29,
@@ -626,7 +591,7 @@ const courses = [
     id: 27,
     title: "Condução de Veículos Híbridos e Elétricos",
     cat: "TecnologiaInovacao",
-    desc: "Particularidades de torque instantâneo, frenagem regenerativa e segurança ativa em alta tensão.",
+    desc: "Particularidades de torque instantâneo, frenagem regenerativa e segurança activa em alta tensão.",
     longDesc: "Capacita condutores corporativos para operar frotas modernas eletrificadas. Aborda táticas de máxima regeneração de bateria, condução preditiva, gerenciamento inteligente de autonomia e protocolos vitais de segurança em sistemas elétricos de alta tensão corporativa."
   },
   {
@@ -658,17 +623,13 @@ const friendlyCategories = {
   'TecnologiaInovacao': 'Tecnologia e Inovação'
 };
 
-// Dados de simulação (Fallback para quando o Firebase não possui credenciais salvas no ambiente)
+// Dados de simulação inicial para que a interface nunca fique vazia
 const mockSimulationVotes = [
   {
     id: "simulated-vote-1",
     nome: "Carlos Eduardo Silva",
     empresa: "TransLeste Transportes Ltda",
     cargo: "Supervisor de Frota",
-    email: "carlos.frota@transleste.com",
-    telefone: "(11) 98111-2222",
-    cursoSugerido: "MOPP Reciclagem Express",
-    categoriaSugerida: "Reciclagem",
     votos: {
       "Formação de Condutores de Emergência (Res. 1020)": 9,
       "MOPP: Segurança no Transporte de Cargas Perigosas": 10,
@@ -684,8 +645,6 @@ const mockSimulationVotes = [
     nome: "Mariana Alencar",
     empresa: "Mineração Ouro Verde",
     cargo: "Engenheira de Segurança (SESMT)",
-    email: "mariana.alencar@ouroverde.com",
-    telefone: "(31) 99222-3333",
     votos: {
       "Direção Defensiva: Técnica e Comportamento": 10,
       "Condução em Condições Adversas e Climas Extremos": 9,
@@ -701,8 +660,6 @@ const mockSimulationVotes = [
     nome: "Roberto Guedes",
     empresa: "Logística Expressa Brasil",
     cargo: "Diretor de Operações",
-    email: "roberto.guedes@logexpress.com.br",
-    telefone: "(21) 97333-4444",
     votos: {
       "Direção Defensiva: Técnica e Comportamento": 9,
       "Eco-Driving: Eficiência Energética e Redução de Custos": 10,
@@ -715,16 +672,13 @@ const mockSimulationVotes = [
   }
 ];
 
-// Variáveis de Estado locais & globais
 let user = null;
-let allVotesData = [...mockSimulationVotes]; // Carregado com simulação rica por padrão
+let allVotesData = [...mockSimulationVotes]; 
 let cachedConsolidatedCourses = [];
 let userVotes = {};
 let currentModalCourseId = null;
-let currentPage = 'catalog';
-let isSimulationMode = true; // Muda para false se conectar no Firebase real
+let isSimulationMode = true;
 
-// Carregamento Seguro de Credenciais
 let dbInstance = null;
 let authInstance = null;
 let appId = 'previa-consultoria-app';
@@ -742,11 +696,10 @@ try {
     console.log("Ambiente sem Firebase Config. Rodando em Modo Simulação Local Premium.");
   }
 } catch (e) {
-  console.error("Falha ao inicializar o Firebase. Rodando em Modo Simulação Local.", e);
+  console.warn("Falha ao inicializar o Firebase. Rodando em Modo Simulação Local.", e);
   isSimulationMode = true;
 }
 
-// Inicialização segura de Autenticação se não for simulação
 const initAuth = async () => {
   if (isSimulationMode || !authInstance) return;
   try {
@@ -756,7 +709,7 @@ const initAuth = async () => {
       await signInAnonymously(authInstance);
     }
   } catch (error) {
-    console.warn("Autenticação anônima bloqueada ou indisponível. Utilizando modo simulador.", error);
+    console.warn("Autenticação anônima bloqueada ou indisponível. Utilizando modo simulator.", error);
     isSimulationMode = true;
   }
 };
@@ -770,13 +723,12 @@ if (!isSimulationMode) {
     }
   });
 } else {
-  // Dispara carregamento das estatísticas da simulação local no carregamento da tela
   setTimeout(() => {
     updatePublicBadges();
+    renderResultsDashboard();
   }, 100);
 }
 
-// Configuração de sincronização em tempo real na nuvem
 function setupRealtimeVotes() {
   if (isSimulationMode || !user || !dbInstance) return;
   try {
@@ -786,12 +738,9 @@ function setupRealtimeVotes() {
       snapshot.forEach((doc) => {
         liveVotes.push({ id: doc.id, ...doc.data() });
       });
-      // Mescla votos da nuvem com votos simulados para gráficos mais robustos
       allVotesData = liveVotes.length > 0 ? liveVotes : [...mockSimulationVotes];
       updatePublicBadges();
-      if (currentPage === 'results') {
-        renderResultsDashboard();
-      }
+      renderResultsDashboard();
     }, (error) => {
       console.warn("Acesso restrito ao Firestore no sandbox. Utilizando simulação local.", error);
       isSimulationMode = true;
@@ -801,70 +750,35 @@ function setupRealtimeVotes() {
   }
 }
 
-// Atualizar badges públicos de participação
 function updatePublicBadges() {
   const count = allVotesData.length;
   const badge = document.getElementById('nav-results-badge');
   if (badge) badge.innerText = count;
 }
 
-// Expõe funções vitais ao escopo global para compatibilidade com eventos inline
-window.switchPage = switchPage;
+window.scrollToSection = scrollToSection;
 window.filterCategory = filterCategory;
 window.vote = vote;
 window.openModal = openModal;
 window.closeModal = closeModal;
-window.scrollToForm = scrollToForm;
 window.showAlert = showAlert;
 window.closeAlert = closeAlert;
 window.submitForm = submitForm;
-window.updateCourseChart = updateCourseChart;
 window.setPieCenterText = setPieCenterText;
 
-// Gera dinamicamente o design do topo do card (Paralelogramo geométrico clean)
-function getCourseCardHeaderHtml(c) {
-  const color = categoryColors[c.cat] || '#0497a7';
-  return `
-    <div class="w-full h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-950 flex flex-col justify-center items-center p-4 text-center relative select-none">
-      <div class="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:14px_24px]"></div>
-      
-      <svg class="absolute inset-0 w-full h-full p-2" preserveAspectRatio="none" viewBox="0 0 100 100">
-        <polygon points="10,15 90,15 80,85 0,85" fill="${color}" opacity="0.95" />
-      </svg>
-      
-      <div class="w-4/5 py-1 px-2 z-10 text-center">
-        <span class="text-white text-xs sm:text-sm font-black uppercase tracking-wider drop-shadow-md line-clamp-3 leading-snug">
-          ${c.title}
-        </span>
-      </div>
-    </div>
-  `;
-}
-
-// Função para alternar de página de forma fluida
-function switchPage(pageId) {
-  currentPage = pageId;
-  const catalogPage = document.getElementById('page-catalog');
-  const resultsPage = document.getElementById('page-results');
-  const navBtnCatalog = document.getElementById('nav-btn-catalog');
-  const navBtnResults = document.getElementById('nav-btn-results');
-
-  if (pageId === 'catalog') {
-    catalogPage.classList.remove('hidden');
-    resultsPage.classList.add('hidden');
-    navBtnCatalog.className = "px-3 py-1.5 rounded-md text-xs sm:text-sm font-semibold transition-all text-white bg-[#0497a7]";
-    navBtnResults.className = "px-3 py-1.5 rounded-md text-xs sm:text-sm font-semibold transition-all text-slate-400 hover:text-white";
-  } else {
-    catalogPage.classList.add('hidden');
-    resultsPage.classList.remove('hidden');
-    navBtnCatalog.className = "px-3 py-1.5 rounded-md text-xs sm:text-sm font-semibold transition-all text-slate-400 hover:text-white";
-    navBtnResults.className = "px-3 py-1.5 rounded-md text-xs sm:text-sm font-semibold transition-all text-white bg-[#0497a7]";
-    renderResultsDashboard();
+function scrollToSection(id) {
+  const element = document.getElementById(id);
+  if (element) {
+    const headerOffset = 80;
+    const elementPosition = element.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth"
+    });
   }
-  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Atualiza o texto centralizado do gráfico Donut/Pizza
 function setPieCenterText(label, score) {
   const lbl = document.getElementById('pie-center-label');
   const val = document.getElementById('pie-center-value');
@@ -872,7 +786,6 @@ function setPieCenterText(label, score) {
   if (val) val.innerText = score;
 }
 
-// Renderiza o Dashboard de Resultados com agregação global precisa
 function renderResultsDashboard() {
   const ratedCount = allVotesData.length;
   const statCount = document.getElementById('stat-rated-count');
@@ -887,14 +800,12 @@ function renderResultsDashboard() {
     document.getElementById('stat-top-category').innerText = "Nenhuma";
     document.getElementById('pie-chart-svg').innerHTML = '';
     document.getElementById('pie-chart-legend').innerHTML = `<p class="text-center text-slate-400 py-4">Aguardando as primeiras avaliações...</p>`;
-    document.getElementById('course-chart-container').innerHTML = `<p class="text-center py-6 text-slate-400 text-xs">Aguardando as primeiras avaliações...</p>`;
     if (tableBody) tableBody.innerHTML = '';
     if (noResultsView) noResultsView.classList.remove('hidden');
     return;
   }
   if (noResultsView) noResultsView.classList.add('hidden');
 
-  // Inicializar acumuladores de pontuações
   let courseScoresSum = {};
   let courseVoteCount = {};
 
@@ -903,7 +814,6 @@ function renderResultsDashboard() {
     courseVoteCount[c.title] = 0;
   });
 
-  // Agrega dados de todas as submissões guardadas
   allVotesData.forEach(voteDoc => {
     const votos = voteDoc.votos || {};
     for (const title in votos) {
@@ -914,7 +824,6 @@ function renderResultsDashboard() {
     }
   });
 
-  // Consolidação final
   let consolidatedCourses = courses.map(c => {
     const sum = courseScoresSum[c.title];
     const count = courseVoteCount[c.title];
@@ -928,10 +837,8 @@ function renderResultsDashboard() {
     };
   });
 
-  // Salvar no estado global para filtro interativo do gráfico
   cachedConsolidatedCourses = consolidatedCourses;
 
-  // Cálculo da Média Geral
   let grandTotalSum = 0;
   let grandTotalCount = 0;
   consolidatedCourses.forEach(cc => {
@@ -944,11 +851,9 @@ function renderResultsDashboard() {
   document.getElementById('stat-avg-score').innerText = overallAvg;
   setPieCenterText("MÉDIA GERAL", overallAvg);
 
-  // Cursos de Topo (Média de interesse coletiva >= 8.0)
   let highInterestCount = consolidatedCourses.filter(cc => cc.votesCount > 0 && cc.avgScore >= 8.0).length;
   document.getElementById('stat-high-interest').innerText = highInterestCount;
 
-  // Mapeamento e cálculo médio das categorias
   let catSums = {};
   let catCounts = {};
   consolidatedCourses.forEach(cc => {
@@ -978,13 +883,12 @@ function renderResultsDashboard() {
   }
   document.getElementById('stat-top-category').innerText = friendlyCategories[topCategory] || "Nenhuma";
 
-  // ---- 1. GERAR GRÁFICO DE PIZZA (DONUT) EM SVG ----
+  // ---- GRÁFICO DE PIZZA (DONUT) EM SVG ----
   let sumAvg = categoriesAvgData.reduce((acc, curr) => acc + curr.avg, 0);
   let cumulativePercent = 0;
   let svgHtml = '';
   let legendHtml = '';
 
-  // Função matemática para converter coordenadas polares em cartesianas
   function getCoordinatesForPercent(percent) {
     const x = Math.cos(2 * Math.PI * percent);
     const y = Math.sin(2 * Math.PI * percent);
@@ -995,16 +899,15 @@ function renderResultsDashboard() {
     const percent = sumAvg > 0 ? (item.avg / sumAvg) : 0;
     if (percent === 0) return;
     
-    // Cálculo dos arcos do círculo SVG
     const [startX, startY] = getCoordinatesForPercent(cumulativePercent);
     cumulativePercent += percent;
     const [endX, endY] = getCoordinatesForPercent(cumulativePercent);
     const largeArcFlag = percent > 0.5 ? 1 : 0;
 
     const pathData = [
-      `M ${startX * 40 + 50} ${startY * 40 + 50}`, // Move para borda
-      `A 40 40 0 ${largeArcFlag} 1 ${endX * 40 + 50} ${endY * 40 + 50}`, // Arco exterior
-      `L 50 50` // Fecha caminho no centro
+      `M ${startX * 40 + 50} ${startY * 40 + 50}`, 
+      `A 40 40 0 ${largeArcFlag} 1 ${endX * 40 + 50} ${endY * 40 + 50}`, 
+      `L 50 50`
     ].join(' ');
 
     svgHtml += `
@@ -1016,7 +919,6 @@ function renderResultsDashboard() {
       </path>
     `;
 
-    // Gerar item da legenda lateral
     legendHtml += `
       <div class="flex items-center gap-2 cursor-pointer transition-all hover:translate-x-1"
            onmouseover="setPieCenterText('${item.label.toUpperCase()}', '${item.avg.toFixed(1)}')"
@@ -1031,10 +933,7 @@ function renderResultsDashboard() {
   document.getElementById('pie-chart-svg').innerHTML = svgHtml || `<circle cx="50" cy="50" r="40" fill="#e2e8f0"></circle>`;
   document.getElementById('pie-chart-legend').innerHTML = legendHtml || `<p class="text-xs text-slate-400">Nenhum interesse mapeado</p>`;
 
-  // ---- 2. GERAR GRÁFICO DE CURSOS (FILTRADO) ----
-  updateCourseChart();
-
-  // ---- 3. POPULAR TABELA DE DETALHES GERAIS ----
+  // ---- POPULAR TABELA DE DETALHES GERAIS ----
   consolidatedCourses.sort((a, b) => b.avgScore - a.avgScore);
   let tableHtml = '';
   consolidatedCourses.forEach(cc => {
@@ -1043,7 +942,6 @@ function renderResultsDashboard() {
     const displayScore = isRated ? cc.avgScore.toFixed(1) : '0.0';
     const displayVotes = cc.votesCount === 1 ? '1 voto' : cc.votesCount + ' votos';
     
-    // Cores de termômetro conforme média
     let termBg = 'bg-slate-200';
     if (isRated) {
       if (cc.avgScore >= 8) termBg = 'bg-teal-500';
@@ -1053,20 +951,20 @@ function renderResultsDashboard() {
 
     tableHtml += `
       <tr class="hover:bg-slate-50/80 transition-colors">
-        <td class="py-4 px-6">
+        <td class="py-3 px-4">
           <div class="font-semibold text-slate-800 leading-tight">${cc.title}</div>
+          <div class="text-[9px] text-slate-400">${friendlyCategories[cc.cat] || cc.cat}</div>
         </td>
-        <td class="py-4 px-6 text-slate-500 text-xs">${friendlyCategories[cc.cat] || cc.cat}</td>
-        <td class="py-4 px-6 text-center">
-          <div class="font-bold text-slate-800 text-sm">${displayScore} / 10</div>
-          <div class="text-[10px] text-slate-400 font-medium">${displayVotes}</div>
+        <td class="py-3 px-4 text-center shrink-0 whitespace-nowrap">
+          <div class="font-bold text-slate-800 text-xs">${displayScore} / 10</div>
+          <div class="text-[8px] text-slate-400 font-medium">${displayVotes}</div>
         </td>
-        <td class="py-4 px-6">
-          <div class="flex items-center gap-3">
-            <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
-              <div class="h-2.5 rounded-full ${termBg} transition-all duration-500" style="width: ${termometroWidth}"></div>
+        <td class="py-3 px-4">
+          <div class="flex items-center gap-2">
+            <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
+              <div class="h-2 rounded-full ${termBg} transition-all duration-500" style="width: ${termometroWidth}"></div>
             </div>
-            <span class="text-xs font-semibold text-slate-400 w-8 text-right">${termometroWidth}</span>
+            <span class="text-[9px] font-semibold text-slate-400 w-6 text-right">${termometroWidth}</span>
           </div>
         </td>
       </tr>
@@ -1075,46 +973,25 @@ function renderResultsDashboard() {
   if (tableBody) tableBody.innerHTML = tableHtml;
 }
 
-// Atualiza o ranking de cursos baseado no filtro de categorias selecionado
-function updateCourseChart() {
-  const categoryFilter = document.getElementById('chart-category-filter').value;
-  let filtered = [];
-
-  if (categoryFilter === 'All') {
-    // Top 10 mais votados no geral
-    filtered = [...cachedConsolidatedCourses].sort((a, b) => b.avgScore - a.avgScore).slice(0, 10);
-  } else {
-    // Filtrado por categoria e ordenado de forma decrescente
-    filtered = cachedConsolidatedCourses.filter(cc => cc.cat === categoryFilter).sort((a, b) => b.avgScore - a.avgScore);
-  }
-
-  let chartHtml = '';
-  if (filtered.length === 0) {
-    chartHtml = `<p class="text-center py-6 text-slate-400 text-xs">Sem dados suficientes nesta categoria.</p>`;
-  } else {
-    filtered.forEach(item => {
-      const percentage = (item.avgScore * 10).toFixed(0) + '%';
-      const isRated = item.votesCount > 0;
-      const displayScore = isRated ? item.avgScore.toFixed(1) : '0.0';
-      const displayVotes = item.votesCount === 1 ? '1 voto' : item.votesCount + ' votos';
-      chartHtml += `
-        <div class="space-y-1">
-          <div class="flex justify-between text-xs font-medium text-slate-700 gap-4">
-            <span class="truncate block max-w-[70%]" title="${item.title}">${item.title}</span>
-            <span class="text-[#f96c05] shrink-0 font-semibold">${displayScore} <span class="text-slate-400 text-[9px] font-normal">(${displayVotes})</span></span>
-          </div>
-          <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
-            <div class="bg-[#f96c05] h-full rounded-full transition-all duration-500" style="width: ${percentage}"></div>
-          </div>
-        </div>
-      `;
-    });
-  }
-  const chartContainer = document.getElementById('course-chart-container');
-  if (chartContainer) chartContainer.innerHTML = chartHtml;
+function getCourseCardHeaderHtml(c) {
+  const color = categoryColors[c.cat] || '#0497a7';
+  return `
+    <div class="w-full h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-950 flex flex-col justify-center items-center p-4 text-center relative select-none">
+      <div class="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+      
+      <svg class="absolute inset-0 w-full h-full p-2" preserveAspectRatio="none" viewBox="0 0 100 100">
+        <polygon points="10,15 90,15 80,85 0,85" fill="${color}" opacity="0.95" />
+      </svg>
+      
+      <div class="w-4/5 py-1 px-2 z-10 text-center">
+        <span class="text-white text-xs sm:text-sm font-black uppercase tracking-wider drop-shadow-md line-clamp-3 leading-snug">
+          ${c.title}
+        </span>
+      </div>
+    </div>
+  `;
 }
 
-// Gerador robusto dos botões de notas (0 a 10)
 function getRatingButtonsHtml(courseId, currentVote) {
   let buttonsHtml = '';
   for (let n = 0; n <= 10; n++) {
@@ -1127,7 +1004,6 @@ function getRatingButtonsHtml(courseId, currentVote) {
   return buttonsHtml;
 }
 
-// Injeta os cards de cursos dinamicamente no DOM com base na categoria
 function renderCourses(filteredCategory = 'All') {
   const grid = document.getElementById('course-grid');
   if (!grid) return;
@@ -1144,10 +1020,8 @@ function renderCourses(filteredCategory = 'All') {
     const currentVote = userVotes[c.id] !== undefined ? userVotes[c.id] : null;
     const scoreLabel = currentVote !== null ? 'Nota ' + currentVote : 'Não avaliado';
     
-    // Layout refinado do cartão com as notas em destaque
     cardsHtml += `
       <div class="card-zoom bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden flex flex-col group">
-          <!-- Cabeçalho geométrico clássico -->
           <div class="h-44 relative overflow-hidden cursor-pointer" onclick="openModal(${c.id})">
               ${getCourseCardHeaderHtml(c)}
               <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-slate-900 text-[9px] font-extrabold px-2.5 py-1 rounded-full shadow-md uppercase tracking-wider z-20">
@@ -1162,7 +1036,6 @@ function renderCourses(filteredCategory = 'All') {
                   ${c.desc}
               </p>
           </div>
-          <!-- Seleção direta de notas no rodapé do card -->
           <div class="p-5 pt-4 mt-auto bg-[#0497a7] text-white rounded-b-2xl shadow-inner">
               <div class="flex justify-between items-center mb-3">
                   <span class="text-[10px] font-black uppercase tracking-wider text-slate-100">Seu nível de interesse:</span>
@@ -1180,12 +1053,7 @@ function renderCourses(filteredCategory = 'All') {
   grid.innerHTML = cardsHtml;
 }
 
-// Filtra os botões de categoria ativa de forma fluida
 function filterCategory(catName) {
-  if (currentPage !== 'catalog') {
-    switchPage('catalog');
-  }
-
   document.querySelectorAll('.cat-btn').forEach(btn => {
     btn.classList.remove('bg-[#0497a7]', 'text-white', 'shadow-sm', 'active');
     btn.classList.add('bg-slate-100', 'text-slate-700');
@@ -1199,7 +1067,6 @@ function filterCategory(catName) {
   renderCourses(catName);
 }
 
-// Registra a nota dada a um curso localmente
 function vote(courseId, score) {
   userVotes[courseId] = score;
   const activeCategoryBtn = document.querySelector('.cat-btn.active');
@@ -1208,9 +1075,26 @@ function vote(courseId, score) {
 
   const votedCount = Object.keys(userVotes).length;
   document.getElementById('vote-badge').innerText = votedCount;
+
+  if (isSimulationMode) {
+    let userSimDoc = allVotesData.find(d => d.id === "user-active-draft");
+    if (!userSimDoc) {
+      userSimDoc = {
+        id: "user-active-draft",
+        nome: "Rascunho Ativo",
+        votos: {}
+      };
+      allVotesData.push(userSimDoc);
+    }
+    const targetCourse = courses.find(c => c.id === courseId);
+    if (targetCourse) {
+      userSimDoc.votos[targetCourse.title] = score;
+    }
+    updatePublicBadges();
+    renderResultsDashboard();
+  }
 }
 
-// Abre o modal de descrição do curso
 function openModal(courseId) {
   const course = courses.find(c => c.id === courseId);
   if (!course) return;
@@ -1218,7 +1102,6 @@ function openModal(courseId) {
   document.getElementById('modal-title').innerText = course.title;
   document.getElementById('modal-desc').innerText = course.longDesc;
   
-  // Atualiza o container de capa do modal
   const headerContainer = document.getElementById('modal-header-container');
   headerContainer.innerHTML = `
     ${getCourseCardHeaderHtml(course)}
@@ -1249,13 +1132,6 @@ function closeModal() {
   }, 150);
 }
 
-// Rola suavemente até o formulário de finalização
-function scrollToForm() {
-  const formSection = document.getElementById('contact-form-section');
-  if (formSection) formSection.scrollIntoView({ behavior: 'smooth' });
-}
-
-// Custom Notification Alert (Substitutos de alert() para sandbox segura)
 function showAlert(title, message) {
   document.getElementById('alert-title').innerText = title;
   document.getElementById('alert-msg').innerText = message;
@@ -1266,7 +1142,6 @@ function closeAlert() {
   document.getElementById('alert-modal').classList.add('hidden');
 }
 
-// Lógica de envio com integração na nuvem pública em tempo real
 async function submitForm(event) {
   event.preventDefault();
   const keys = Object.keys(userVotes);
@@ -1275,7 +1150,6 @@ async function submitForm(event) {
     return;
   }
 
-  // Capturar dados do formulário higienizados
   const name = document.getElementById('form-name').value.trim();
   const company = document.getElementById('form-company').value.trim();
   const role = document.getElementById('form-role').value.trim();
@@ -1284,7 +1158,6 @@ async function submitForm(event) {
   const suggestedCourse = document.getElementById('form-suggested-course').value.trim();
   const suggestedCategory = document.getElementById('form-suggested-category').value.trim();
 
-  // Montagem do objeto de feedback estruturado
   const feedbackData = {
     nome: name,
     empresa: company,
@@ -1304,7 +1177,6 @@ async function submitForm(event) {
     }
   });
 
-  // UI Feedback de carregamento
   const btn = document.getElementById('submit-btn');
   const btnText = document.getElementById('btn-text');
   const spinner = document.getElementById('btn-spinner');
@@ -1314,17 +1186,16 @@ async function submitForm(event) {
 
   try {
     if (!isSimulationMode && dbInstance && user) {
-      // Guarda os votos diretamente na coleção pública em tempo real do Firestore
       const userVoteDoc = doc(dbInstance, 'artifacts', appId, 'public', 'data', 'votes', user.uid);
       await setDoc(userVoteDoc, feedbackData);
     } else {
-      // Se estiver em simulação, adiciona na memória do painel dinamicamente
+      allVotesData = allVotesData.filter(d => d.id !== "user-active-draft");
       const simId = "simulated-" + Date.now();
       allVotesData.push({ id: simId, ...feedbackData });
       updatePublicBadges();
+      renderResultsDashboard();
     }
 
-    // ENVIO PARA O GOOGLE SHEETS VIA WEBHOOK
     if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL.trim() !== "") {
       await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
@@ -1338,17 +1209,15 @@ async function submitForm(event) {
 
     showAlert("Muito Obrigado!", "As suas respostas foram registadas e integradas em tempo real ao painel de estatísticas coletivas e enviadas para a planilha corporativa.");
     
-    // Limpar formulário de forma segura
     document.getElementById('feedback-form').reset();
     userVotes = {};
     document.getElementById('vote-badge').innerText = "0";
     
-    // Recarrega lista e move para o painel de resultados coletivos
     renderCourses();
-    switchPage('results');
+    scrollToSection('dashboard-section');
   } catch (error) {
     console.error("Erro ao submeter avaliação pública:", error);
-    showAlert("Salvo com sucesso!", "As notas foram atualizadas com sucesso e calculadas no painel dinâmico.");
+    showAlert("Salvo localmente!", "Seus dados foram integrados com sucesso ao painel dinâmico da página.");
   } finally {
     btn.disabled = false;
     btnText.innerText = "Enviar Dados e Notas de Interesse";
@@ -1356,7 +1225,6 @@ async function submitForm(event) {
   }
 }
 
-// Inicialização imediata do catálogo de cursos
 document.addEventListener('DOMContentLoaded', function() {
   renderCourses();
 });
