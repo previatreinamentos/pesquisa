@@ -96,7 +96,7 @@ body {
         O Seu Feedback Constrói o Nosso Treinamento
       </h2>
       <p class="text-base sm:text-lg text-slate-100 max-w-2xl mx-auto font-light leading-relaxed">
-        Para oferecermos a melhor e mais personalizada capacitação para a sua equipe, <strong class="text-[#f96c05] font-bold">atribua uma nota de interesse de 0 a 10</strong> em cada um dos cursos abaixo.
+        Para oferecermos a melhor e mais personalizada capacitação para a sua equipa, <strong class="text-[#f96c05] font-bold">atribua uma nota de interesse de 0 a 10</strong> em cada um dos cursos abaixo.
       </p>
       <div class="mt-6 flex flex-wrap justify-center gap-3 text-xs">
         <span class="bg-black/20 px-3 py-1.5 rounded-lg flex items-center gap-2">
@@ -367,7 +367,7 @@ import { getFirestore, doc, setDoc, collection, onSnapshot } from "https://www.g
 // =========================================================================================================
 // LINK DA IMPLANTAÇÃO DA PLANILHA GOOGLE (GOOGLE SHEETS APPS SCRIPT WEB APP URL ATUALIZADO)
 // =========================================================================================================
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbznADZnprvTHP1rlM93AfcxDsM6ZuV-feRgKuppLFjC6b38r3EZRzcAaZJIHdIxxnfv/exec'; 
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzyXzscbSzPxfhbBAtEG3bGy5i9DNRX9xsVhdJw8cTQLdQGA5SBEJ4Ray1cznc9XCaqWg/exec'; 
 
 const courses = [
   // ESPECIALIZADOS
@@ -1152,7 +1152,7 @@ async function submitForm(event) {
       });
     }
 
-    showAlert("Muito Obrigado!", "As suas respostas foram registadas e integradas em tempo real ao painel de estatísticas.");
+    showAlert("Muito Obrigado!", "As suas respostas foram registadas e integradas em tempo real ao painel de estatísticas coletivas e enviadas para a planilha corporativa.");
     
     document.getElementById('feedback-form').reset();
     userVotes = {};
