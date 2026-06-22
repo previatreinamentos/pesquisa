@@ -119,7 +119,7 @@ body {
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div id="category-scroll-container" class="flex items-center overflow-x-auto py-3.5 gap-2 no-scrollbar scroll-smooth">
         <button onclick="filterCategory('All')" id="btn-cat-All" class="cat-btn active bg-[#0497a7] text-white px-4 py-2 rounded-full font-bold text-xs sm:text-sm whitespace-nowrap shadow-sm transition-all">
-          Todos os Cursos (30)
+          Todos os Cursos (24)
         </button>
         <button onclick="filterCategory('Especializados')" id="btn-cat-Especializados" class="cat-btn bg-slate-100 text-slate-700 hover:bg-slate-200 px-4 py-2 rounded-full font-semibold text-xs sm:text-sm whitespace-nowrap transition-all">
           Especializados
@@ -132,9 +132,6 @@ body {
         </button>
         <button onclick="filterCategory('OperacoesEspeciais')" id="btn-cat-OperacoesEspeciais" class="cat-btn bg-slate-100 text-slate-700 hover:bg-slate-200 px-4 py-2 rounded-full font-semibold text-xs sm:text-sm whitespace-nowrap transition-all">
           Operações Especiais
-        </button>
-        <button onclick="filterCategory('JuridicoNormas')" id="btn-cat-JuridicoNormas" class="cat-btn bg-slate-100 text-slate-700 hover:bg-slate-200 px-4 py-2 rounded-full font-semibold text-xs sm:text-sm whitespace-nowrap transition-all">
-          Jurídico e Normas
         </button>
         <button onclick="filterCategory('LiderancaBemEstar')" id="btn-cat-LiderancaBemEstar" class="cat-btn bg-slate-100 text-slate-700 hover:bg-slate-200 px-4 py-2 rounded-full font-semibold text-xs sm:text-sm whitespace-nowrap transition-all">
           Liderança e Bem-Estar
@@ -508,62 +505,13 @@ const courses = [
     longDesc: "Desenvolvimento para equipes operacionais de áreas de difícil acesso ou equipes de campo. Treina o uso de equipamentos de força física e mecânica para reuniões de remoção de veículos atolados de maneira 100% segura e regulamentada."
   },
   {
-    id: 18,
-    title: "Direção de Veículos de Apoio em Mineração e Obras",
-    cat: "OperacoesEspeciais",
-    desc: "Tráfego seguro em mineradoras, interação com caminhões giants de minas e pontos cegos críticos.",
-    longDesc: "Ensina as rígidas normas setoriais do tráfego interno de obras complexas e jazidas. Prepara o motorista de picapes leves a sinalizar-se perante máquinas giants, evitando acidentes fatais por esmagamento."
-  },
-  {
     id: 19,
     title: "Técnicas de Operação em Terrenos de Difícil Acesso",
     cat: "OperacoesEspeciais",
     desc: "Operações táticas em dunas, encostas escorregadias, terrenos pedregosos e travessias alagadas.",
     longDesc: "Um vai aprofundado sobre inclininações extremas laterais, prevenção de capotamentos, uso do freio motor em descidas acentuadas e cálculo seguro da altura máxima de água permitida para cruzamento."
   },
-  {
-    id: 20,
-    title: "Normas Ambientais em Operações Off-Road",
-    cat: "OperacoesEspeciais",
-    desc: "Condução em áreas de preservação ambiental com impacto mínimo e conformidade legal.",
-    longDesc: "Focado em mitigar o impacto de erosão de solos, poluição de nascentes ou danos à flora local durante o deslocamento operacional das equipes de manutenção civil, elétrica ou florestal."
-  },
-  // JURÍDICO E NORMAS
-  {
-    id: 21,
-    title: "Atualização em Legislação e CTB",
-    cat: "JuridicoNormas",
-    desc: "Análise das leis vigentes, infrações, penalidades severas e pontuações na CNH do condutor.",
-    longDesc: "Mantém os condutores em dia com as últimas reformas e portarias do Código de Trânsito Brasileiro. Foca em evitar suspensões de habilitação profissionais por descumprimento legal."
-  },
-  {
-    id: 22,
-    title: "Gestão de Riscos Viários e Engenharia de Tráfego",
-    cat: "JuridicoNormas",
-    desc: "Uso de estatísticas, leis geométricas de tráfego e infraestrutura viária para motoristas.",
-    longDesc: "Ensina a ler e interpretar a sinalização rodoviária, táticas de engenharia urbana e a prever curvas acentuadas ou cruzamentos perigosos por meio da sinalização ativa de solo e de placas de trânsito."
-  },
-  {
-    id: 23,
-    title: "Fiscalização Eletrônica e Gestão de Infrações",
-    cat: "JuridicoNormas",
-    desc: "Entendimento técnico sobre radares, tolerâncias metrológicas legais do INMETRO e multas corporativas.",
-    longDesc: "Esclarece o funcionamento tecnológico de radares fotográficos, laços indutivos na pista, limites e tolerâncias regulamentadas, instruindo sobre a responsabilidade do condutor perante multas na frota corporativa."
-  },
-  {
-    id: 24,
-    title: "Compliance e Responsabilidade Civil do Condutor",
-    cat: "JuridicoNormas",
-    desc: "Prevenção de processos, conduta corporativa em acidentes e as implicações penais e cíveis.",
-    longDesc: "Aborda a responsabilidade solidária entre a empresa e o motorista, integrando regras de compliance e as consequências legais em caso de negligência, imperícia ou imprudência no comando do veículo corporativo."
-  },
-  {
-    id: 25,
-    title: "Gestão de Processos Administrativos de Trânsito",
-    cat: "JuridicoNormas",
-    desc: "Rotina operacional interna de recursos de multas, defesas e indicação de condutores (NIC).",
-    longDesc: "Essencial para administradores de frotas e motoristas. Ensina os fluxos formais de envio de documentação, prazos legais para a correta identificação dos condutores infratores, mitigando as multas por Não Indicação (NIC)."
-  },
+ 
   // LIDERANÇA E BEM-ESTAR
   {
     id: 26,
@@ -600,9 +548,16 @@ const courses = [
     cat: "TecnologiaInovacao",
     desc: "Planejamento inteligente de caronas solidárias corporativas e transporte integrado.",
     longDesc: "Incentiva condutas e projetos sustentáveis de mobilidade corporativa integrada, diminuindo congestionamentos, organizando frotas de transporte compartilhado e otimizando o deslocamento diário da equipe."
-  }
-];
+  },
 
+{
+    id: 31,
+    title: "Mobilidade Segura: Prevenção de Riscos no Trajeto Casa-Trabalho",
+    cat: "SegurancaComportamento",
+    desc: "Orientação para deslocamento seguro utilizando múltiplos meios de transporte: ônibus, metrô, motos, bicicletas, pedestres e autopropelidos.",
+    longDesc: "Treinamento voltado para a prevenção de acidentes de trajeto (que contam legalmente como acidentes de trabalho). Oferece uma abordagem multimodal integrando condutas seguras em transporte público (metrô e ônibus), veículos de duas rodas (motocicletas e bicicletas), deslocamentos a pé (pedestres) e novos modais urbanos (patinetes e autopropelidos). Foca no planejamento de rotas, autopercepção de risco e no controle do fator pressa."
+  },
+];
 const categoryColors = {
   'Especializados': '#0497a7',
   'SegurancaComportamento': '#f96c05',
@@ -618,7 +573,6 @@ const friendlyCategories = {
   'SegurancaComportamento': 'Segurança e Comportamento',
   'GestaoEficiencia': 'Gestão e Eficiência',
   'OperacoesEspeciais': 'Operações Especiais',
-  'JuridicoNormas': 'Jurídico e Normas',
   'LiderancaBemEstar': 'Liderança e Bem-Estar',
   'TecnologiaInovacao': 'Tecnologia e Inovação'
 };
@@ -650,7 +604,6 @@ const mockSimulationVotes = [
       "Condução em Condições Adversas e Climas Extremos": 9,
       "Operação e Segurança Off-Road 4x4": 10,
       "Resgate e Auto-recuperação em Ambientes Hostis": 10,
-      "Direção de Veículos de Apoio em Mineração e Obras": 10,
       "Técnicas de Operação em Terrenos de Difícil Acesso": 9,
       "Psicologia do Trânsito: Gestão de Fadiga e Estresse": 8
     }
