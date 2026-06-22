@@ -54,7 +54,6 @@ body {
 </head>
 <body class="bg-slate-50 text-slate-900 flex flex-col min-h-screen">
 
-<!-- Header com links de âncoras suaves -->
 <header class="bg-[#0b0c10] shadow-xl sticky top-0 z-50 border-b-2 border-[#0497a7]">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
     <div class="flex items-center gap-4">
@@ -89,7 +88,6 @@ body {
 
 <!-- PAGINA UNIFICADA: CATÁLOGO DE CURSOS NO TOPO -->
 <div id="page-catalog" class="flex-grow flex flex-col scroll-mt-20">
-  <!-- Hero Banner explicativo sobre a mecânica de votação -->
   <section class="bg-gradient-to-br from-[#0497a7] via-[#037885] to-[#8c7c54] text-white py-12 px-4 relative overflow-hidden">
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(249,108,5,0.15),transparent_45%)]"></div>
     <div class="max-w-4xl mx-auto text-center relative z-10">
@@ -114,15 +112,11 @@ body {
     </div>
   </section>
 
-  <!-- Filtros de Categorias (Mantidos e fixados na barra para excelente usabilidade nos 30 cursos) -->
   <div class="bg-white shadow-sm border-b border-slate-200 sticky top-[74px] z-30">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div id="category-scroll-container" class="flex items-center overflow-x-auto py-3.5 gap-2 no-scrollbar scroll-smooth">
         <button onclick="filterCategory('All')" id="btn-cat-All" class="cat-btn active bg-[#0497a7] text-white px-4 py-2 rounded-full font-bold text-xs sm:text-sm whitespace-nowrap shadow-sm transition-all">
-          Todos os Cursos (24)
-        </button>
-        <button onclick="filterCategory('Especializados')" id="btn-cat-Especializados" class="cat-btn bg-slate-100 text-slate-700 hover:bg-slate-200 px-4 py-2 rounded-full font-semibold text-xs sm:text-sm whitespace-nowrap transition-all">
-          Especializados
+          Todos os Cursos (25)
         </button>
         <button onclick="filterCategory('SegurancaComportamento')" id="btn-cat-SegurancaComportamento" class="cat-btn bg-slate-100 text-slate-700 hover:bg-slate-200 px-4 py-2 rounded-full font-semibold text-xs sm:text-sm whitespace-nowrap transition-all">
           Segurança e Comportamento
@@ -130,8 +124,8 @@ body {
         <button onclick="filterCategory('GestaoEficiencia')" id="btn-cat-GestaoEficiencia" class="cat-btn bg-slate-100 text-slate-700 hover:bg-slate-200 px-4 py-2 rounded-full font-semibold text-xs sm:text-sm whitespace-nowrap transition-all">
           Gestão e Eficiência
         </button>
-        <button onclick="filterCategory('OperacoesEspeciais')" id="btn-cat-OperacoesEspeciais" class="cat-btn bg-slate-100 text-slate-700 hover:bg-slate-200 px-4 py-2 rounded-full font-semibold text-xs sm:text-sm whitespace-nowrap transition-all">
-          Operações Especiais
+        <button onclick="filterCategory('Especializados')" id="btn-cat-Especializados" class="cat-btn bg-slate-100 text-slate-700 hover:bg-slate-200 px-4 py-2 rounded-full font-semibold text-xs sm:text-sm whitespace-nowrap transition-all">
+          Especializados
         </button>
         <button onclick="filterCategory('LiderancaBemEstar')" id="btn-cat-LiderancaBemEstar" class="cat-btn bg-slate-100 text-slate-700 hover:bg-slate-200 px-4 py-2 rounded-full font-semibold text-xs sm:text-sm whitespace-nowrap transition-all">
           Liderança e Bem-Estar
@@ -143,7 +137,6 @@ body {
     </div>
   </div>
 
-  <!-- Grid principal contendo todos os cards de cursos -->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
     <div id="course-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <!-- Cards injetados via JS -->
@@ -151,7 +144,6 @@ body {
   </main>
 </div>
 
-<!-- FORMULÁRIO DE ENVIO E IDENTIFICAÇÃO (AGORA POSICIONADO LOGO APÓS O CATÁLOGO E ANTES DO DASHBOARD) -->
 <section id="contact-form-section" class="bg-white border-t border-b border-slate-200 py-16 px-4 scroll-mt-20">
   <div class="max-w-3xl mx-auto bg-slate-50 border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-lg relative">
     <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-[#0497a7] text-white px-6 py-2 rounded-full font-bold text-sm tracking-wide shadow-md">
@@ -211,14 +203,13 @@ body {
   </div>
 </section>
 
-<!-- SEÇÃO DO DASHBOARD INTEGRADO (LOGOR ABAIXO DO FORMULÁRIO) -->
 <section id="dashboard-section" class="bg-slate-100 py-16 px-4 scroll-mt-20">
   <div class="max-w-7xl mx-auto space-y-10">
     <div class="text-center">
       <span class="bg-[#0497a7]/20 text-[#0497a7] text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full border border-[#0497a7]/30">Estatísticas Consolidadas em Tempo Real</span>
       <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight mt-3 mb-2 text-slate-900">Resultados da Pesquisa de Demanda</h2>
       <p class="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto font-light leading-relaxed">
-        Análise consolidada e tempo real com base no feedback acumulado de todos os participantes.
+        Análise consolidada em tempo real com base no feedback acumulado de todos os participantes.
       </p>
     </div>
 
@@ -262,7 +253,6 @@ body {
 
     <!-- Conteúdo Analítico: Gráfico de Pizza de Categorias e Tabela Geral Lado a Lado -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-      
       <!-- Gráfico de Pizza (Donut) de Categorias -->
       <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-md lg:col-span-5 flex flex-col">
         <div class="mb-6">
@@ -287,7 +277,6 @@ body {
         </div>
       </div>
 
-      <!-- Tabela Completa de Classificação Geral de Interesse -->
       <div class="bg-white border border-slate-200 rounded-2xl shadow-md lg:col-span-7 flex flex-col overflow-hidden">
         <div class="p-6 border-b border-slate-200">
           <h3 class="text-lg font-bold text-slate-900">Tabela de Preferência Geral</h3>
@@ -368,6 +357,7 @@ body {
     </div>
   </div>
 </footer>
+
 <!-- Firebase SDK p/ armazenamento em tempo real na nuvem -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
@@ -375,10 +365,9 @@ import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged }
 import { getFirestore, doc, setDoc, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
 // =========================================================================================================
-// LINK DA IMPLANTAÇÃO DA PLANILHA GOOGLE (GOOGLE SHEETS APPS SCRIPT WEB APP URL)
-// Insira ou modifique o link de execução gerado pela implantação do Apps Script abaixo:
+// LINK DA IMPLANTAÇÃO DA PLANILHA GOOGLE (GOOGLE SHEETS APPS SCRIPT WEB APP URL ATUALIZADO)
 // =========================================================================================================
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwL6VPCSS5OmnEVvYGbjwJYR0_sIHP0NlZPoH-zpeD2MkgpDbo7hBpToef9yUWRN-a4/exec'; 
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbznADZnprvTHP1rlM93AfcxDsM6ZuV-feRgKuppLFjC6b38r3EZRzcAaZJIHdIxxnfv/exec'; 
 
 const courses = [
   // ESPECIALIZADOS
@@ -394,7 +383,7 @@ const courses = [
     title: "Transporte Escolar: Normas e Segurança Viária",
     cat: "Especializados",
     desc: "Técnicas de segurança no embarque/desembarque e relacionamento ético no transporte de escolares.",
-    longDesc: "Preparação de condutores com as mais rígidas exigências técnicas do trânsito escolar. Desenvolve condutas preventivas, a inspection diária do veículo escolar, além de dinâmicas para assegurar a integridade de menores de idade durante o trajeto de acordo com as normas de segurança viária."
+    longDesc: "Preparação de condutores com as mais rígidas exigências técnicas do trânsito escolar. Desenvolve condutas preventivas, a inspeção diária do veículo escolar, além de dinâmicas para assegurar a integridade de menores de idade durante o trajeto de acordo com as normas de segurança viária."
   },
   {
     id: 3,
@@ -453,13 +442,41 @@ const courses = [
     desc: "Controle em aquaplanagens, frenagem de pânico em asfalto molhado, neblina e baixa aderência.",
     longDesc: "Treinamento tático e prático sobre física de dinâmica veicular sob asfalto molhado, poças de óleo, poeira ou visibilidade próxima a zero. Ensina reações rápidas de esterçamento para recuperar aderência."
   },
+  {
+    id: 21,
+    title: "Direção Antidistração: O Impacto da Tecnologia no Volante",
+    cat: "SegurancaComportamento",
+    desc: "Focado no combate ao uso do celular ao volante, dispersão por notificações e riscos da distração digital.",
+    longDesc: "Desenvolve competências práticas para mitigar o uso indevido de smartphones, leitura de mensagens e manuseio de GPS em trânsito. Ensina focar exclusivamente na via e neutralizar a ansiedade de notificações digitais."
+  },
+  {
+    id: 22,
+    title: "Prevenção de Incidentes em Manobras e Estacionamentos",
+    cat: "SegurancaComportamento",
+    desc: "Eliminação de pontos cegos em marchas à ré, manobras em garagens corporativas e pátios logísticos.",
+    longDesc: "Foca no controle absoluto das dimensões e pontos cegos do veículo leve e utilitário comercial. Desenvolve técnicas de baliza guiada, uso correto de retrovisores e sensores, eliminando incidentes patrimoniais comuns e de alto custo."
+  },
+  {
+    id: 23,
+    title: "Direção Defensiva Aplicada ao Trânsito Urbano",
+    cat: "SegurancaComportamento",
+    desc: "Interação preventiva no ecossistema das grandes metrópoles com fluxo compartilhado e misto.",
+    longDesc: "Trabalha especificamente o ambiente das vias urbanas congestionadas, manobras em cruzamentos críticos, e o posicionamento tático defensivo em relação a ciclistas, pedestres e corredores de motociclistas."
+  },
+  {
+    id: 24,
+    title: "Mobilidade Segura: Prevenção de Riscos no Trajeto Casa-Trabalho",
+    cat: "SegurancaComportamento",
+    desc: "Direcionamento para deslocamento diário utilizando múltiplos meios: ônibus, metrô, motos, bicicletas, pedestres e patinetes.",
+    longDesc: "Oferece uma abordagem preventiva multimodal que protege o colaborador fora do expediente de direção corporativo oficial. Foca no planejamento logístico pessoal do trajeto doméstico, autopercepção de risco no transporte coletivo, uso de modais ativos e micro-mobilidade com autopropelidos."
+  },
   // GESTÃO E EFICIÊNCIA
   {
     id: 11,
     title: "Eco-Driving: Eficiência Energética e Redução de Custos",
     cat: "GestaoEficiencia",
     desc: "Gerenciamento inteligente de marchas, controle de inércia e otimização do combustível.",
-    longDesc: "Focado em motoristas de frotas comerciais leves e pesadas. Ensina a compreender as rotações eficientes do motor, acorrencia da aceleração progressiva, e o aproveitamento máximo da energia cinética para reduzir até 20% do combustível e desgaste."
+    longDesc: "Focado em motoristas de frotas comerciais leves e pesadas. Ensina a compreender as rotações eficientes do motor, ocorrência de aceleração progressiva, e o aproveitamento máximo da energia cinética para reduzir até 20% do combustível e desgaste."
   },
   {
     id: 12,
@@ -489,29 +506,6 @@ const courses = [
     desc: "Direcionamento focado na redução do Custo Total de Propriedade do veículo corporativo.",
     longDesc: "Desenha uma ponte clara entre a condução do dia a dia e o impacto financeiro de longo prazo no ciclo de depreciação, desgaste e custos operacionais agregados aos ativos de transporte da empresa."
   },
-  // OPERAÇÕES ESPECIAIS
-  {
-    id: 16,
-    title: "Operação e Segurança Off-Road 4x4",
-    cat: "OperacoesEspeciais",
-    desc: "Mapeamento de tração integral, uso de marcha reduzida e transposição segura de aclives.",
-    longDesc: "Treinamento tático e operacional para frotas que trafegam em estradas rurais, frentes de obra ou acessos lamacentos de mineradoras. foca no uso correto de bloqueios de diferencial e prevenção de quebras de suspensão."
-  },
-  {
-    id: 17,
-    title: "Resgate e Auto-recuperação em Ambientes Hostis",
-    cat: "OperacoesEspeciais",
-    desc: "Uso de guinchos elétricos, cintas de arrasto, pranchas e ancoragem segura off-road.",
-    longDesc: "Desenvolvimento para equipes operacionais de áreas de difícil acesso ou equipes de campo. Treina o uso de equipamentos de força física e mecânica para reuniões de remoção de veículos atolados de maneira 100% segura e regulamentada."
-  },
-  {
-    id: 19,
-    title: "Técnicas de Operação em Terrenos de Difícil Acesso",
-    cat: "OperacoesEspeciais",
-    desc: "Operações táticas em dunas, encostas escorregadias, terrenos pedregosos e travessias alagadas.",
-    longDesc: "Um vai aprofundado sobre inclininações extremas laterais, prevenção de capotamentos, uso do freio motor em descidas acentuadas e cálculo seguro da altura máxima de água permitida para cruzamento."
-  },
- 
   // LIDERANÇA E BEM-ESTAR
   {
     id: 26,
@@ -528,11 +522,18 @@ const courses = [
     longDesc: "Desenvolvido para comitivas executivas, presidentes, diretores e convidados especiais. Foca em postura profissional exemplar, direção confortável de carros sedã de luxo e prevenção contra sinistros urbanos."
   },
   {
-    id: 29,
-    title: "Liderança e Didática para Instrutores de Frota",
+    id: 32,
+    title: "Cultura de Segurança Viária e Imagem Corporativa",
     cat: "LiderancaBemEstar",
-    desc: "Formação técnica de multiplicadores viários internos para equipes de SESMT e CIPA.",
-    longDesc: "Transforma seus melhores profissionais de segurança e transporte em líderes multiplicadores que sabem repassar as técnicas de segurança veicular para os demais motoristas com metodologia educacional de alta eficácia."
+    desc: "Zelo e corresponsabilidade sobre a reputação da marca exposta no veículo e na condução no dia a dia.",
+    longDesc: "Orienta o colaborador a entender que a direção agressiva destrói a percepção da marca estampada no automóvel comercial. Ensina diretrizes de cordialidade, civilidade no trânsito e o impacto financeiro direto da imagem viária."
+  },
+  {
+    id: 33,
+    title: "Gestão do Tempo, Pressão e Ansiedade na Jornada",
+    cat: "LiderancaBemEstar",
+    desc: "Equilíbrio emocional para lidar com metas, trânsito pesado e planejamento de rotas comerciais.",
+    longDesc: "Desenvolve a autogestão emocional de profissionais comerciais e técnicos. Fornece ferramentas para planejar viagens de forma a eliminar o hábito da pressa e o estresse que potencializam acidentes."
   },
   // TECNOLOGIA E INOVAÇÃO
   {
@@ -540,7 +541,7 @@ const courses = [
     title: "Condução de Veículos Híbridos e Elétricos",
     cat: "TecnologiaInovacao",
     desc: "Particularidades de torque instantâneo, frenagem regenerativa e segurança activa em alta tensão.",
-    longDesc: "Capacita condutores corporativos para operar frotas modernas eletrificadas. Aborda táticas de máxima regeneração de bateria, condução preditiva, gerenciamento inteligente de autonomia e protocolos vitais de segurança em sistemas elétricos de alta tensão corporativa."
+    longDesc: "Capacita condutores corporativos para operar frotas modernas eletrificadas. Aborda táticas de máxima recuperação de bateria, condução preditiva, gerenciamento inteligente de autonomia e protocolos vitais de segurança em sistemas elétricos de alta tensão corporativa."
   },
   {
     id: 30,
@@ -548,22 +549,13 @@ const courses = [
     cat: "TecnologiaInovacao",
     desc: "Planejamento inteligente de caronas solidárias corporativas e transporte integrado.",
     longDesc: "Incentiva condutas e projetos sustentáveis de mobilidade corporativa integrada, diminuindo congestionamentos, organizando frotas de transporte compartilhado e otimizando o deslocamento diário da equipe."
-  },
-
-{
-    id: 31,
-    title: "Mobilidade Segura: Prevenção de Riscos no Trajeto Casa-Trabalho",
-    cat: "SegurancaComportamento",
-    desc: "Orientação para deslocamento seguro utilizando múltiplos meios de transporte: ônibus, metrô, motos, bicicletas, pedestres e autopropelidos.",
-    longDesc: "Treinamento voltado para a prevenção de acidentes de trajeto (que contam legalmente como acidentes de trabalho). Oferece uma abordagem multimodal integrando condutas seguras em transporte público (metrô e ônibus), veículos de duas rodas (motocicletas e bicicletas), deslocamentos a pé (pedestres) e novos modais urbanos (patinetes e autopropelidos). Foca no planejamento de rotas, autopercepção de risco e no controle do fator pressa."
-  },
+  }
 ];
+
 const categoryColors = {
   'Especializados': '#0497a7',
   'SegurancaComportamento': '#f96c05',
   'GestaoEficiencia': '#8c7c54',
-  'OperacoesEspeciais': '#10b981',
-  'JuridicoNormas': '#6366f1',
   'LiderancaBemEstar': '#ec4899',
   'TecnologiaInovacao': '#8b5cf6'
 };
@@ -572,7 +564,6 @@ const friendlyCategories = {
   'Especializados': 'Especializados',
   'SegurancaComportamento': 'Segurança e Comportamento',
   'GestaoEficiencia': 'Gestão e Eficiência',
-  'OperacoesEspeciais': 'Operações Especiais',
   'LiderancaBemEstar': 'Liderança e Bem-Estar',
   'TecnologiaInovacao': 'Tecnologia e Inovação'
 };
@@ -591,21 +582,21 @@ const mockSimulationVotes = [
       "Condução Preventiva para Frotas Leves e Utilitários": 8,
       "Gestão de Performance: Telemetria Aplicada": 9,
       "Manutenção Preventiva e Conservação da Frota": 8,
-      "Atualização em Legislação e CTB": 9
+      "Mobilidade Segura: Prevenção de Riscos no Trajeto Casa-Trabalho": 8
     }
   },
   {
     id: "simulated-vote-2",
     nome: "Mariana Alencar",
-    empresa: "Mineração Ouro Verde",
+    empresa: "Logística Expressa Brasil",
     cargo: "Engenheira de Segurança (SESMT)",
     votos: {
       "Direção Defensiva: Técnica e Comportamento": 10,
       "Condução em Condições Adversas e Climas Extremos": 9,
-      "Operação e Segurança Off-Road 4x4": 10,
-      "Resgate e Auto-recuperação em Ambientes Hostis": 10,
-      "Técnicas de Operação em Terrenos de Difícil Acesso": 9,
-      "Psicologia do Trânsito: Gestão de Fadiga e Estresse": 8
+      "Direção Antidistração: O Impacto da Tecnologia no Volante": 10,
+      "Prevenção de Incidentes em Manobras e Estacionamentos": 9,
+      "Psicologia do Trânsito: Gestão de Fadiga e Estresse": 8,
+      "Mobilidade Segura: Prevenção de Riscos no Trajeto Casa-Trabalho": 10
     }
   },
   {
@@ -620,7 +611,8 @@ const mockSimulationVotes = [
       "Condução Eficiente e Redução de Emissões (Foco em ESG)": 10,
       "Gestão de TCO: Otimizando o Ciclo de Vida do Veículo": 8,
       "Condução de Veículos Híbridos e Elétricos": 9,
-      "Mobilidade Corporativa Inteligente e Sustentável": 8
+      "Mobilidade Corporativa Inteligente e Sustentável": 8,
+      "Mobilidade Segura: Prevenção de Riscos no Trajeto Casa-Trabalho": 9
     }
   }
 ];
@@ -1160,7 +1152,7 @@ async function submitForm(event) {
       });
     }
 
-    showAlert("Muito Obrigado!", "As suas respostas foram registadas e integradas em tempo real ao painel de estatísticas coletivas.");
+    showAlert("Muito Obrigado!", "As suas respostas foram registadas e integradas em tempo real ao painel de estatísticas.");
     
     document.getElementById('feedback-form').reset();
     userVotes = {};
